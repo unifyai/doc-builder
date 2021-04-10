@@ -62,6 +62,6 @@ html_css_files = [
     'css/custom.css',
 ]
 
-autodoc_member_order = 'bysource'
+autodoc_member_order = 'alphabetical'
 
 suppress_warnings = []
