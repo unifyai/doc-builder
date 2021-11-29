@@ -21,12 +21,14 @@ def modify_html_file(html_filepath):
     html_contents = ''.join([char for i, char in enumerate(html_contents)
                              if not (char.isdigit() and html_contents[i+1:i+5] == '.png')])
     html_contents = html_contents.replace('3.141592653589793', 'π')
-    html_contents = html_contents.replace('docs/ivy.html', '../ivy"')
-    html_contents = html_contents.replace('docs/ivy_mech.html', '../mech"')
-    html_contents = html_contents.replace('docs/ivy_vision.html', '../vision"')
-    html_contents = html_contents.replace('docs/ivy_robot.html', '../robot"')
-    html_contents = html_contents.replace('docs/ivy_memory.html', '../memory"')
-    html_contents = html_contents.replace('docs/ivy_gym.html', '../gym"')
+
+    with open(os.path.join(this_dir, 'ivy_modules.txt'), 'r') as f:
+        module_names = f.readlines()
+
+    for module_name in module_names:
+        html_contents = html_contents.replace(
+            'docs/{}.html'.format(module_name), '../{}"'.format(module_name.split('_')[-1]))
+
     contents_split1 = html_contents.split('<code class="sig-prename descclassname">')
     contents_split2 = [item.split('</code>') for item in contents_split1]
     contents_split2_modded = [contents_split2[0]] +\
