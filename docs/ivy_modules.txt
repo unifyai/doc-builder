@@ -6,3 +6,4 @@ ivy_gym
 ivy_memory
 ivy_builder
 ivy_models
+ivy_ecosystem
