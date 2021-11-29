@@ -159,3 +159,15 @@ the icons below to learn more!
 
     </div>
     <br clear="all" />
+
+Citation
+--------
+
+::
+
+    @article{lenton2021ivy,
+      title={Ivy: Templated Deep Learning for Inter-Framework Portability},
+      author={Lenton, Daniel and Pardo, Fabio and Falck, Fabian and James, Stephen and Clark, Ronald},
+      journal={arXiv preprint arXiv:2102.02886},
+      year={2021}
+    }
