@@ -23,7 +23,7 @@ def modify_html_file(html_filepath):
     html_contents = html_contents.replace('3.141592653589793', 'π')
 
     with open(os.path.join(this_dir, 'ivy_modules.txt'), 'r') as f:
-        module_names = f.readlines()
+        module_names = [line.replace('\n', '') for line in f.readlines()]
 
     for module_name in module_names:
         html_contents = html_contents.replace(
