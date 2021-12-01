@@ -1,4 +1,4 @@
-.. image:: https://github.com/ivy-dl/doc-builder/blob/master/docs/partial_source/logos/logo.png
+.. image:: https://github.com/ivy-dl/doc-builder/blob/master/docs/partial_source/logos/doc_builder_logo.png
    :width: 100%
 
 .. raw:: html
