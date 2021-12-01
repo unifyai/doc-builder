@@ -1,8 +1,5 @@
-.. raw:: html
-
-    <p align="center">
-        <img width="75%" style="display: block;" src='docs/partial_source/logos/ivy_doc_builder_logo.png'>
-    </p>
+.. image:: https://github.com/ivy-dl/doc-builder/blob/master/docs/partial_source/logos/logo.png
+   :width: 100%
 
 .. raw:: html
 
