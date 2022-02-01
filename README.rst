@@ -4,7 +4,7 @@
 .. raw:: html
 
     <br/>
-    <a href="https://discord.gg/EN9YS3QW8w">
+    <a href="https://discord.gg/G4aR9Q7DTN">
         <img style="float: left; padding-right: 4px; padding-bottom: 4px;" src="https://img.shields.io/discord/799879767196958751?color=blue&label=%20&logo=discord&logoColor=white">
     </a>
     <br clear="all" />
