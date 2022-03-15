@@ -9,6 +9,7 @@ EXCLUDED_DIRS = ['.pytest_cache', 'docs', 'tests', '__pycache__']
 THIS_DIR = ''
 SUBMODULE_TITLE = ''
 ROOT_DIR = ''
+SUBMOD_ORDERS = dict()
 SUBMODS_TO_SKIP = list()
 SUBMODS_TO_STEP = list()
 
@@ -235,6 +236,9 @@ def create_rst_files(directory):
         toctree_key = module_name
         toctree_key_values = [item.split('/')[-1] + '.rst' for item in sub_dirs] + \
                              [item.split('/')[-1][:-3] + '.rst' for item in modules]
+        toctree_key_v_wo_rst = tuple([tkv.replace('.rst', '') for tkv in toctree_key_values])
+        if toctree_key_v_wo_rst in SUBMOD_ORDERS:
+            toctree_key_values = [so + '.rst' for so in SUBMOD_ORDERS[toctree_key_v_wo_rst]]
         toctree_dict = {toctree_key: toctree_key_values}
         append_toctree_to_rst(toctree_dict, rst_path)
 
@@ -264,6 +268,13 @@ def main(root_dir, submodules_title):
         global SUBMODS_TO_STEP
         with open(submods_to_step_path, 'r') as f:
             SUBMODS_TO_STEP = [l.replace('\n', '') for l in f.readlines()[1:]]
+    submod_orders_path = os.path.join(THIS_DIR, 'submod_orders.txt')
+    if os.path.exists(submod_orders_path):
+        global SUBMOD_ORDERS
+        with open(submod_orders_path, 'r') as f:
+            submod_orders = [l.replace('\n', '').replace(' ', '')[1:-1].split(',') for l in f.readlines()[1:]]
+        submod_orders_sorted = [tuple(sorted(so)) for so in submod_orders]
+        SUBMOD_ORDERS = dict(zip(submod_orders_sorted, submod_orders))
     project_title = string.capwords(root_dir.split('/')[-1].replace('_', ' '))
     with open('partial_source/conf.py', 'r') as conf_file:
         conf_contents = conf_file.read()
