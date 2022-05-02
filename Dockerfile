@@ -1,8 +1,8 @@
 FROM ubuntu:20.04
 
 # create user
-ARG user
-ARG uid
+ARG user=usr
+ARG uid=1000
 RUN useradd -ms /bin/bash -u $uid $user
 
 # non-interactive
