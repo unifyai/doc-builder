@@ -33,4 +33,4 @@ WORKDIR /home/$user
 
 # entry point
 COPY --chown=$user:$user docs/entrypoint.sh /home/$user
-ENTRYPOINT ["bash", "entrypoint.sh"]
+ENTRYPOINT ["bash", "entrypoint.sh", "--root_dir"]
