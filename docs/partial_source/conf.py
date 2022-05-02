@@ -36,7 +36,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosectionlabel',
               'sphinx_rtd_theme',
-              'sphinx.ext.napoleon']
+              'sphinx.ext.napoleon',
+              'sphinx_autodoc_typehints']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -82,3 +83,12 @@ napoleon_use_rtype = False
 napoleon_preprocess_types = False
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
+
+# type hints
+typehints_fully_qualified = False
+always_document_param_types = False
+typehints_document_rtype = False
+typehints_use_rtype = False
+typehints_defaults = 'braces-after'
+simplify_optional_unions = True
+typehints_formatter = None
