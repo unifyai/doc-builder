@@ -21,8 +21,8 @@ RUN cat requirements.txt | xargs -n 1 pip3 install; exit 0
 USER $user
 
 # project directory
-RUN mkdir /home/$user/ivy
-RUN mkdir /home/$user/ivy/docs
+RUN mkdir /home/$user/project
+RUN mkdir /home/$user/project/docs
 
 # doc directories
 COPY --chown=$user:$user docs /home/$user/global_docs
