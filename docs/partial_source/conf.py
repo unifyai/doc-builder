@@ -87,8 +87,8 @@ napoleon_attr_annotations = True
 # type hints
 typehints_fully_qualified = False
 always_document_param_types = False
-typehints_document_rtype = False
-typehints_use_rtype = False
+typehints_document_rtype = True
+typehints_use_rtype = True
 typehints_defaults = 'braces-after'
 simplify_optional_unions = False
 typehints_formatter = None
