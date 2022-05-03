@@ -1,9 +1,9 @@
 FROM ubuntu:20.04
 
 # create user
-ARG user=usr
-ARG uid=1000
-RUN useradd -ms /bin/bash -u $uid $user
+ARG user=root
+ARG uid=0
+RUN useradd -ms /bin/bash -u $uid $user || exit 0
 
 # non-interactive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,6 +21,7 @@ RUN cat requirements.txt | xargs -n 1 pip3 install; exit 0
 USER $user
 
 # project directory
+RUN mkdir /home/$user || exit 0
 RUN mkdir /home/$user/project
 RUN mkdir /home/$user/project/docs
 
