@@ -83,6 +83,18 @@ napoleon_use_rtype = False
 napoleon_preprocess_types = False
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
+napoleon_custom_sections = [('Functional Example', 'Examples'),
+                            ('Functional Examples', 'Examples'),
+                            ('Functional Array Example', 'Examples'),
+                            ('Functional Array Examples', 'Examples'),
+                            ('Functional Container Example', 'Examples'),
+                            ('Functional Container Examples', 'Examples'),
+                            ('Instance Method Example', 'Examples'),
+                            ('Instance Method Examples', 'Examples'),
+                            ('Array Instance Method Example', 'Examples'),
+                            ('Array Instance Method Examples', 'Examples'),
+                            ('Container Instance Method Example', 'Examples'),
+                            ('Container Instance Method Examples', 'Examples')]
 
 # type hints
 typehints_fully_qualified = False
