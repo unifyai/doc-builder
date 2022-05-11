@@ -294,12 +294,21 @@ def main(root_dir, submodules_title):
             SUBMODS_TO_SKIP = [l.replace('\n', '') for l in f.readlines()[1:]]
 
     # These are the submodules to step into (skipping the directory from doc stack)
-    # This means they won't have their own home page
+    # This means they won't have their own index page
     submods_to_step_path = os.path.join(THIS_DIR, 'submods_to_step.txt')
     if os.path.exists(submods_to_step_path):
         global SUBMODS_TO_STEP
         with open(submods_to_step_path, 'r') as f:
             SUBMODS_TO_STEP = [l.replace('\n', '') for l in f.readlines()[1:]]
+
+    # These are the submodules to process irrespective of alphabetical order
+    submod_orders_path = os.path.join(THIS_DIR, 'submod_orders.txt')
+    if os.path.exists(submod_orders_path):
+        global SUBMOD_ORDERS
+        with open(submod_orders_path, 'r') as f:
+            submod_orders = [l.replace('\n', '').replace(' ', '')[1:-1].split(',') for l in f.readlines()[1:]]
+        submod_orders_sorted = [tuple(sorted(so)) for so in submod_orders]
+        SUBMOD_ORDERS = dict(zip(submod_orders_sorted, submod_orders))
 
     # Here the project title is Ivy
     project_title = string.capwords(root_dir.split('/')[-1].replace('_', ' '))
