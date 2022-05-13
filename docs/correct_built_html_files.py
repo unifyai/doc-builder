@@ -7,10 +7,8 @@ with open(os.path.join(this_dir, 'permitted_namespaces.json'), 'r') as file:
 
 
 def trim_namespace(full_namespace):
-    print("FULL NAMESPACE", full_namespace)
     for namespace_to_check, permitted_namespace in PERMITTED_NAMESPACES.items():
         if namespace_to_check in full_namespace:
-            print("PERMITTED NAMESPACE", permitted_namespace)
             return permitted_namespace
     return full_namespace
 
