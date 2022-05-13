@@ -93,6 +93,15 @@ def append_toctree_to_rst(toctree_dict, rst_path, caption=None):
     str_to_write = '\n'
     for key, list_of_rsts in toctree_dict.items():
         cap = key.capitalize().replace('_', ' ') if caption is None else caption
+
+        # New headings
+        # Functional --> Functions
+        # Stateful --> Classes
+        if cap == 'Functional':
+            cap = 'Functions'
+        elif cap == 'Stateful':
+            cap = 'Classes'
+        
         str_to_write += '\n.. toctree::\n   :hidden:\n   :maxdepth: -1\n   :caption: ' + cap + '\n\n'
         for rst_filename in list_of_rsts:
             str_to_write += '   ' + os.path.join(key, rst_filename) + '\n'
