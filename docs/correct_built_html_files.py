@@ -25,6 +25,10 @@ def modify_html_file(html_filepath):
     # Replace 3.14 with pi
     html_contents = html_contents.replace('3.141592653589793', 'π')
 
+    # Remove # noqa from all files
+    # This gets added to the markup in cases of hyperlinks where the line size gets too long
+    html_contents = html_contents.replace('# noqa', '')
+
     # Read all ivy modules for which markup is generated
     with open(os.path.join(this_dir, 'ivy_modules.txt'), 'r') as f:
         module_names = [line.replace('\n', '') for line in f.readlines()]

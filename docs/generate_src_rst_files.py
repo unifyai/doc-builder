@@ -89,7 +89,6 @@ def create_index_rst(sub_contents_dict):
 
 
 def append_toctree_to_rst(toctree_dict, rst_path, caption=None):
-    print("RST PATH", rst_path)
     # appends the rst files generated for a module in module_name.rst
     str_to_write = '\n'
     for key, list_of_rsts in toctree_dict.items():
@@ -104,7 +103,6 @@ def append_toctree_to_rst(toctree_dict, rst_path, caption=None):
 
 def copy_readme_to_rst(readme_path, rst_path):
     # copy data from README.rst to module_name.rst
-    print("README AND RST", readme_path, rst_path)
     with open(readme_path) as file:
         readme_contents = file.read()
     with open(rst_path, 'w+') as file:
