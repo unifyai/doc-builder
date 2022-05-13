@@ -37,12 +37,12 @@ def modify_html_file(html_filepath):
             'docs/{}.html'.format(module_name), '../{}"'.format(module_name.split('_')[-1]))
 
     # Update namespaces for inline code in documentation
-    contents_split1 = html_contents.split('<code class="sig-prename descclassname">')
-    contents_split2 = [item.split('</code>') for item in contents_split1]
+    contents_split1 = html_contents.split('<span class="sig-prename descclassname">')
+    contents_split2 = [item.split('</span>') for item in contents_split1]
     contents_split2_modded = [contents_split2[0]] +\
                              [[trim_namespace(item[0])] + item[1:] for item in contents_split2[1:]]
-    contents_split1_modded = ['</code>'.join(item) for item in contents_split2_modded]
-    html_contents_modded = '<code class="sig-prename descclassname">'.join(contents_split1_modded)
+    contents_split1_modded = ['</span>'.join(item) for item in contents_split2_modded]
+    html_contents_modded = '<span class="sig-prename descclassname">'.join(contents_split1_modded)
     with open(html_filepath, 'w') as file:
         file.write(html_contents_modded)
 
