@@ -4,7 +4,8 @@ Building the Docs
 Following are the files involved in the documentation building pipeline:
 
 
-:code:`make_docs.sh`:
+:code:`make_docs.sh`
+--------------------
 
 This file exists in the docs folder of the project for which documentation is to be generated.
 This file 
