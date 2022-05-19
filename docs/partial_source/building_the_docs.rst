@@ -8,7 +8,6 @@ Following are the files involved in the documentation building pipeline:
 --------------------
 
 This file exists in the docs folder of the project for which documentation is to be generated.
-This file 
 It uses the unifyai/doc-builder:latest image and creates a container for documentation building.
 
 
