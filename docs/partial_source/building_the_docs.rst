@@ -1,5 +1,5 @@
-Documentation Building Pipeline
-===============================
+Building the Docs
+=================
 
 Following are the files involved in the documentation building pipeline:
 
