@@ -94,7 +94,9 @@ napoleon_custom_sections = [('Functional Example', 'Examples'),
                             ('Array Instance Method Example', 'Examples'),
                             ('Array Instance Method Examples', 'Examples'),
                             ('Container Instance Method Example', 'Examples'),
-                            ('Container Instance Method Examples', 'Examples')]
+                            ('Container Instance Method Examples', 'Examples'),
+                            ('Operator Example', 'Examples'),
+                            ('Operator Examples', 'Examples')]
 
 # type hints
 typehints_fully_qualified = False
