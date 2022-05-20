@@ -97,3 +97,7 @@ html.writer-html5
   background-color: #009600 !important;
   color: #fff;
 }
+
+.highlight .gp{
+    color: #006400;
+}
