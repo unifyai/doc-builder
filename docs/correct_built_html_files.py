@@ -45,6 +45,16 @@ def modify_html_file(html_filepath):
                              [[trim_namespace(item[0])] + item[1:] for item in contents_split2[1:]]
     contents_split1_modded = ['</span>'.join(item) for item in contents_split2_modded]
     html_contents_modded = '<span class="sig-prename descclassname">'.join(contents_split1_modded)
+
+    # Update links to remove "<no title>" from submodules to be stepped
+    breadcrumbs_index = html_contents_modded.find('wy-breadcrumbs')
+    no_title_index = html_contents_modded[breadcrumbs_index:].find('&lt;no title&gt;')
+    if no_title_index != -1:
+        start_index = html_contents_modded[0:breadcrumbs_index + no_title_index].rfind('<li>')
+        end_index = html_contents_modded[start_index:].find('</li>')
+        html_contents_modded = html_contents_modded.replace(html_contents_modded[start_index:start_index+end_index+6], "")
+        no_title_index = html_contents_modded[breadcrumbs_index:].find('&lt;no title&gt;')
+
     with open(html_filepath, 'w') as file:
         file.write(html_contents_modded)
 
