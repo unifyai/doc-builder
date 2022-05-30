@@ -28,8 +28,6 @@ def modify_html_file(html_filepath):
         res = 0
         for a_index in a_indices:
             a_index += res
-            print(a_index)
-            print(html_contents[a_index-10:a_index+10])
             html_contents = html_contents[0:a_index] + " logo" + html_contents[a_index:]
             res += 5
     
