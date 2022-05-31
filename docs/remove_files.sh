@@ -25,6 +25,6 @@ cd ..
 if [ -z "$(ls -A logos)" ]; then
    rm -rf logos
 fi
-rm -rf building_the_docs.rst
+rm -rf contributing/building_the_docs.rst
 rm -rf conf.py
 rm -rf supported_frameworks.rst
