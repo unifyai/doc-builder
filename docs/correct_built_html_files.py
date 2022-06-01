@@ -19,8 +19,8 @@ def modify_html_file(html_filepath):
     with open(html_filepath) as file:
         html_contents = file.read()
     
-    if html_filepath.split('/')[-1] == 'supported_frameworks.html':
-        support_index = html_contents.find('Supported Frameworks:')
+    support_index = html_contents.find('<div class="line"><strong>Supported Frameworks:</strong></div>')
+    if support_index != -1:
         p_index = html_contents[support_index:].find('<p') + support_index + 2
         html_contents = html_contents[0:p_index] + " class=supported_frameworks" + html_contents[p_index:]
         p_end_index = html_contents[support_index:].find('</p>') + support_index
