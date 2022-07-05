@@ -8,6 +8,8 @@ rm -rf make.bat
 rm -rf _make_docs.sh
 rm -rf Makefile
 rm -rf sphinx-build.py
+rm -rf build/array/array_methods
+rm -rf build/container/container_methods
 rm -rf ../ivy/array/array_methods.py
 rm -rf ../ivy/container/container_methods.py
 cd partial_source || exit

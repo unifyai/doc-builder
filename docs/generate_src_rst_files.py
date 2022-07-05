@@ -471,15 +471,16 @@ def append_instance_content_to_rst(type, path, files, file_str, functional_path)
 
         function_name = (function_line.strip('\n').split(" ")[2]).split('.')[-1]
 
-        if function_name.split('_')[0] == 'static':
-            function_name = '_'.join(function_name.split('_')[1:])
         function_index = file_str.find('def {}('.format(function_name))
         submodule_index = file_str[0:function_index+1].rfind('#ivy.')
         submodule_name = (file_str[submodule_index:].split('\n')[
                           0]).split('.')[-1]
         
+        if function_name.split('_')[0] == 'static':
+            function_name = '_'.join(function_name.split('_')[1:])
+
         if submodule_name in ARRAY_CONTAINER_SUBMODULES_TO_SKIP:
-            return
+            continue
 
         submodule_path = os.path.join(functional_path, submodule_name)
 
@@ -518,14 +519,7 @@ def append_instance_content_to_rst(type, path, files, file_str, functional_path)
         functions.append(os.path.join(submodule_path, function_file))
     
     functions = list(set(functions))
-    for function in functions:
-        function_dir = function[0:-4]
-        files = os.listdir(function_dir)
-        files[1:] = sorted(files[1:])
-        toctree_dict = dict()
-        toctree_dict[function_dir.split('/')[-1]] = files
-        append_toctree_to_rst(toctree_dict, function, function_dir.split('/')[-1])
-
+    return functions
 
 def add_instance_and_static_rsts():
     functional_path = os.path.join(
@@ -553,11 +547,21 @@ def add_instance_and_static_rsts():
     # List all rst files inside container_methods
     container_files = os.listdir(container_path)
 
-    append_instance_content_to_rst(
+    functions1 = append_instance_content_to_rst(
         'container', container_path, container_files, container_str, functional_path)
     
-    append_instance_content_to_rst(
+    functions2 = append_instance_content_to_rst(
         'array', array_path, array_files, array_str, functional_path)
+    
+    functions = functions1 + functions2
+    functions = list(set(functions))
+    for function in functions:
+        function_dir = function[0:-4]
+        files = os.listdir(function_dir)
+        files[1:] = sorted(files[1:])
+        toctree_dict = dict()
+        toctree_dict[function_dir.split('/')[-1]] = files
+        append_toctree_to_rst(toctree_dict, function, function_dir.split('/')[-1])
 
 
 def main(root_dir, submodules_title):
