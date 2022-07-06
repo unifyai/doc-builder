@@ -6,12 +6,12 @@ import string
 import shutil
 import argparse
 from pathlib import Path
+from tempfile import tempdir
 
 # These directories are not explored recursively while generating content for it.
 EXCLUDED_MODULES = ['exceptions', 'library_getter', 'setup', '__init__']
 EXCLUDED_DIRS = ['.pytest_cache', 'docs', 'tests', '__pycache__']
-IMPORTS_TO_IGNORE = ['h5py']
-ARRAY_CONTAINER_SUBMODULES_TO_SKIP = ['container']
+ARRAY_CONTAINER_SUBMODULES_TO_SKIP = ['container', 'wrapping']
 
 THIS_DIR = ''
 SUBMODULE_TITLE = ''
@@ -134,9 +134,14 @@ def add_array_and_container_code(module_str, module_path, dotted_namespace):
     folder = module_path[0:module_path.rfind('/')]
     content = module_str.split("\n")
 
-    # Find import statements
-    import_statements = [
-        line for line in content if 'import' in line and '>>>' not in line]
+    # Find setup statements
+    setup_statements = []
+    for line in content:
+        if line[0:6] != 'class ':
+            setup_statements.append(line)
+        else:
+            break
+    
     file = None
     file_to_modify = {
         '.array.': os.path.join(folder, "array_methods.py"),
@@ -151,17 +156,14 @@ def add_array_and_container_code(module_str, module_path, dotted_namespace):
     else:
         return
 
-    # Read file
+    # Append file
     with open(file, 'a') as f:
         # Add submodule name at the top of file
         f.write('#{}\n'.format(dotted_namespace))
 
-        # Add import statements to the file
-        for line in import_statements:
-            if line.strip(' ').split()[1] in IMPORTS_TO_IGNORE:
-                continue
-            line = line.strip(' ')
-            f.write('{}\n'.format(line.strip(' ')))
+        # Add setup statements to the file
+        for line in setup_statements:
+            f.write('{}\n'.format(line))
 
         # Add function signature and docstrings
         find_def, find_docstring, done, inside_nest = True, False, False, False
@@ -406,7 +408,7 @@ def create_rst_files(directory):
             with open(function_filepath, 'w+') as file:
                 file.write(func_name + extension + '\n' +
                            '=' * len(func_name + extension) + '\n\n'
-                                                  '.. autofunction:: ' + dotted_func + '\n' +
+                           '.. autofunction:: ' + dotted_func + '\n' +
                            supported_fw_str)
 
         # Write class rst files
@@ -460,22 +462,27 @@ def create_rst_files(directory):
     return sub_dirs, modules
 
 
-def append_instance_content_to_rst(type, path, files, file_str, functional_path):
+def append_instance_content_to_rst(function_type, path, files, file_str, functional_path):
     functions = []
     for file in files:
         # Read array rst
         with open(os.path.join(path, file), 'r') as f:
             rst_content = f.readlines()
             function_line = [
-                line for line in rst_content if '.. autofunction::' in line][0]
+                line for line in rst_content if '.. autofunction::' in line]
+            if len(function_line) == 0:
+                continue
+            function_line = function_line[0]
 
-        function_name = (function_line.strip('\n').split(" ")[2]).split('.')[-1]
+        function_name = (function_line.strip(
+            '\n').split(" ")[2]).split('.')[-1]
 
         function_index = file_str.find('def {}('.format(function_name))
         submodule_index = file_str[0:function_index+1].rfind('#ivy.')
         submodule_name = (file_str[submodule_index:].split('\n')[
                           0]).split('.')[-1]
-        
+
+        raw_function_name = str(function_name)
         if function_name.split('_')[0] == 'static':
             function_name = '_'.join(function_name.split('_')[1:])
 
@@ -483,10 +490,10 @@ def append_instance_content_to_rst(type, path, files, file_str, functional_path)
             continue
 
         submodule_path = os.path.join(functional_path, submodule_name)
-
+        
         function_file = [file for file in os.listdir(
             submodule_path) if function_name in file and '.rst' in file][0]
-        
+
         function_dir = os.path.join(submodule_path, function_name)
         os.makedirs(function_dir, exist_ok=True)
 
@@ -495,31 +502,37 @@ def append_instance_content_to_rst(type, path, files, file_str, functional_path)
             submodule_function_line = [
                 idx for idx in range(len(function_file_rst_content)) if '.. autofunction::' in function_file_rst_content[idx]
             ][0]
-        
-        with open(os.path.join(function_dir, file[0:-4]+'_{}.rst'.format(type)), 'w') as f:
+
+        with open(os.path.join(function_dir, file[0:-4]+'_{}.rst'.format(function_type)), 'w') as f:
             for i in range(len(rst_content)):
-                rst_content[i] = rst_content[i].replace('/logos', '/../../logos')
+                rst_content[i] = rst_content[i].replace(
+                    '/logos', '/../../logos')
+            rst_content[0] = "ivy.{}.{}\n".format(
+                function_type.capitalize(), raw_function_name)
+            rst_content[1] = '=' * len(rst_content[0].strip('\n'))
             f.writelines(rst_content)
-        
+
         if not os.path.exists(os.path.join(function_dir, function_name+'_functional.rst')):
             with open(os.path.join(function_dir, function_name+'_functional.rst'), 'w') as f:
                 temp_content = function_file_rst_content.copy()
                 for i in range(len(temp_content)):
-                    temp_content[i] = temp_content[i].replace('/logos', '/../logos')
-                temp_content[0] = temp_content[0].strip('\n') + " functional\n"
+                    temp_content[i] = temp_content[i].replace(
+                        '/logos', '/../logos')
+                temp_content[0] = "ivy.{}\n".format(function_name)
                 temp_content[1] = '=' * len(temp_content[0].strip('\n'))
                 f.writelines(temp_content)
-        
-        final_content = function_file_rst_content[0:submodule_function_line+1] + ['\n'+
-            function_line] + function_file_rst_content[submodule_function_line+1:]
+
+        final_content = function_file_rst_content[0:submodule_function_line+1] + ['\n' +
+                                                                                  function_line] + function_file_rst_content[submodule_function_line+1:]
 
         with open(os.path.join(submodule_path, function_file), 'w') as f:
             f.writelines(final_content)
-        
+
         functions.append(os.path.join(submodule_path, function_file))
-    
+
     functions = list(set(functions))
     return functions
+
 
 def add_instance_and_static_rsts():
     functional_path = os.path.join(
@@ -549,19 +562,24 @@ def add_instance_and_static_rsts():
 
     functions1 = append_instance_content_to_rst(
         'container', container_path, container_files, container_str, functional_path)
-    
+
     functions2 = append_instance_content_to_rst(
         'array', array_path, array_files, array_str, functional_path)
-    
+
     functions = functions1 + functions2
     functions = list(set(functions))
     for function in functions:
         function_dir = function[0:-4]
         files = os.listdir(function_dir)
+        index = [index for index in range(len(files)) if 'functional' in files[index]][0]
+        temp = files[0]
+        files[0] = files[index]
+        files[index] = temp
         files[1:] = sorted(files[1:])
         toctree_dict = dict()
         toctree_dict[function_dir.split('/')[-1]] = files
-        append_toctree_to_rst(toctree_dict, function, function_dir.split('/')[-1])
+        append_toctree_to_rst(toctree_dict, function,
+                              function_dir.split('/')[-1])
 
 
 def main(root_dir, submodules_title):
@@ -636,6 +654,7 @@ def main(root_dir, submodules_title):
     os.remove('autogenerated_source/container/container_methods.rst')
     shutil.rmtree('autogenerated_source/array/array_methods')
     os.remove('autogenerated_source/array/array_methods.rst')
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
