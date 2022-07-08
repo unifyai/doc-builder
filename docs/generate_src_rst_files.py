@@ -532,6 +532,8 @@ def append_instance_content_to_rst(function_type, path, files, file_str, functio
             f.writelines(final_content)
 
         functions.append(os.path.join(submodule_path, function_file))
+        print('function_dir', function_dir)
+        print('function', os.path.join(submodule_path, function_file))
 
     functions = list(set(functions))
     return functions
@@ -572,7 +574,6 @@ def add_instance_and_static_rsts():
     functions = functions1 + functions2
     functions = list(set(functions))
     for function in functions:
-        print('Function', function)
         function_dir = function[0:-4]
         files = os.listdir(function_dir)
         index = [index for index in range(
