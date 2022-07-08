@@ -572,6 +572,7 @@ def add_instance_and_static_rsts():
     functions = functions1 + functions2
     functions = list(set(functions))
     for function in functions:
+        print('Function', function)
         function_dir = function[0:-4]
         files = os.listdir(function_dir)
         index = [index for index in range(
