@@ -495,7 +495,7 @@ def append_instance_content_to_rst(function_type, path, files, file_str, functio
         submodule_path = os.path.join(functional_path, submodule_name)
 
         function_file = [file for file in os.listdir(
-            submodule_path) if function_name in file and '.rst' in file][0]
+            submodule_path) if file == '{}.rst'.format(function_name)][0]
 
         function_dir = os.path.join(submodule_path, function_name)
         os.makedirs(function_dir, exist_ok=True)
@@ -532,8 +532,6 @@ def append_instance_content_to_rst(function_type, path, files, file_str, functio
             f.writelines(final_content)
 
         functions.append(os.path.join(submodule_path, function_file))
-        print('function_dir', function_dir)
-        print('function', os.path.join(submodule_path, function_file))
 
     functions = list(set(functions))
     return functions
