@@ -18,9 +18,9 @@ def modify_html_file(html_filepath):
     with open(html_filepath) as file:
         html_contents = file.read()
 
-    logo_index = html_contents.find('<link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />')
+    logo_index = html_contents.find('    <link rel="stylesheet"')
     end_index = html_contents[logo_index:].find(" />")
-    html_contents_mod = html_contents[0:logo_index+end_index+4] + '\n      <link rel="icon" type="image/png" href="../logos/ivy_logo_only.png">' + html_contents[logo_index+end_index+4:]
+    html_contents_mod = html_contents[0:logo_index+end_index+4] + '      <link rel="icon" type="image/png" href="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_only.png?raw=true">\n' + html_contents[logo_index+end_index+4:]
     html_contents = html_contents_mod
 
     # Making logo layout responsive
