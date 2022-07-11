@@ -18,6 +18,7 @@ def modify_html_file(html_filepath):
     with open(html_filepath) as file:
         html_contents = file.read()
 
+    # Add logo to page header
     logo_index = html_contents.find('    <link rel="stylesheet"')
     end_index = html_contents[logo_index:].find(" />")
     html_contents_mod = html_contents[0:logo_index+end_index+4] + '      <link rel="icon" type="image/png" href="https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_only.png?raw=true">\n' + html_contents[logo_index+end_index+4:]
@@ -72,6 +73,42 @@ def modify_html_file(html_filepath):
         end_index = html_contents_modded[start_index:].find('</li>')
         html_contents_modded = html_contents_modded.replace(html_contents_modded[start_index:start_index+end_index+6], "")
         no_title_index = html_contents_modded[breadcrumbs_index:].find('&lt;no title&gt;')
+
+    
+    if 'functional/ivy/' in html_filepath:
+        function_def_index = [i for i in range(len(html_contents_modded)) if html_contents_modded.startswith('<dt class="sig sig-object py"', i)]
+        function_defs = []
+        for index in function_def_index:
+            function_def = html_contents_modded[index:index+html_contents_modded[index:].find('\n')]
+            if 'array_methods' in function_def or 'container_methods' in function_def:
+                function_defs.append((function_def, index, index+html_contents_modded[index:].find('\n')))
+        
+        submodule_str = 'functional/ivy/'
+        submodule_start = html_filepath.find(submodule_str) + len(submodule_str)
+        submodule_end = submodule_start + html_filepath[submodule_start:].find('/')
+        submodule_name = html_filepath[submodule_start:submodule_end]
+        res = 0
+        for i in range(len(function_defs)):
+            function_def, start_index, end_index = function_defs[i][0], function_defs[i][1], function_defs[i][2]
+            path_start = function_def.find('id="') + 4
+            path_end = path_start + function_def[path_start:].find('"')
+            path = function_def[path_start:path_end]
+            if 'array_methods' in function_def:
+                extension = 'array/{}.html#ArrayWith{}.{}'.format(submodule_name, submodule_name.capitalize(), path.split('.')[-1])
+            else:
+                extension = 'container/{}.html#ContainerWith{}.{}'.format(submodule_name, submodule_name.capitalize(), path.split('.')[-1])
+            ref_string = '<a class="reference internal" href="'
+            ref_start_index = start_index + res + html_contents_modded[start_index+res:].find(ref_string) + len(ref_string)
+            ref_end_index = ref_start_index + html_contents_modded[ref_start_index:].find('"><span')
+            ref = html_contents_modded[ref_start_index:ref_end_index] 
+            ref_len = len(ref)
+            new_ref_str = '_modules/ivy/'
+            new_ref = ref[0:ref.find(new_ref_str)+len(new_ref_str)]
+            new_ref += extension
+            new_ref_len = len(new_ref)
+            html_contents_modded = html_contents_modded[:ref_start_index] + new_ref + html_contents_modded[ref_end_index:]
+            res += new_ref_len - ref_len
+
 
     with open(html_filepath, 'w') as file:
         file.write(html_contents_modded)
