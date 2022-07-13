@@ -234,7 +234,6 @@ def modify_html_file(html_filepath):
                 else:
                     linked_calls[i] = "for {}".format(final_path)
                 i += 1
-            print("html_filepath", html_filepath)
             for i in range(len(function_call_indices)):
                 if linked_calls[i]:
                     docstring_content = (
@@ -245,8 +244,6 @@ def modify_html_file(html_filepath):
                             docstring_content[function_call_indices[i] :].split(" ")[2:]
                         )
                     )
-            print("docstring content")
-            print(docstring_content)
             html_contents_modded = (
                 html_contents_modded[0:docstring_start_index]
                 + docstring_content
