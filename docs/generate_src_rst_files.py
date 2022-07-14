@@ -678,7 +678,7 @@ def write_header_and_toctree_to_rst(
     files = [file for file in os.listdir(folder_path) if ".rst" in file]
     files.sort()
     toctree_dict[submodule] = files
-    write_header_to_rst(file_path, title, module_name, class_name)
+    write_header_to_rst(file_path, title, module_name)
     append_toctree_to_rst(toctree_dict, file_path, title)
 
 
