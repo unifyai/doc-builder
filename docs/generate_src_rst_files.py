@@ -671,14 +671,43 @@ def write_header_to_rst(file_path, title, module_name):
         )
 
 
+def copy_contents_and_update_path(file_path, copy_from_file, submodule):
+    content = []
+    with open(copy_from_file) as f:
+        content = f.readlines()
+    i, n = 0, len(content)
+    while i < n:
+        if ':hidden:' in content[i]:
+            content = content[0:i+1] + [content[i].replace('hidden', 'titlesonly')] + content[i+1:]
+            i += 1
+            n += 1
+        if '/' in content[i]:
+            function_file = '/'.join(copy_from_file.split('/')[0:-1]) + '/' + content[i].strip(' ').strip('\n')
+            with open(function_file) as f:
+                function_content = f.readlines()
+            with open(function_file, 'w+') as f:
+                f.writelines(function_content[3:])
+            content[i] = content[i].replace(submodule, '{}/{}'.format(submodule, submodule))
+        i += 1
+    with open(file_path, 'w') as f:
+        f.writelines(content)
+
+
 def write_header_and_toctree_to_rst(
     folder_path, file_path, title, module_name, submodule
 ):
+    if 'data_classes/array.rst' in file_path:
+        copy_from_file = file_path.replace('data_classes/array.rst', 'data_classes/array/array.rst')
+        copy_contents_and_update_path(file_path, copy_from_file, submodule)
+    elif 'data_classes/container.rst' in file_path:
+        copy_from_file = file_path.replace('data_classes/container.rst', 'data_classes/container/container.rst')
+        copy_contents_and_update_path(file_path, copy_from_file, submodule)
+    else:
+        write_header_to_rst(file_path, title, module_name)
     toctree_dict = {}
-    files = [file for file in os.listdir(folder_path) if ".rst" in file]
+    files = [file for file in os.listdir(folder_path) if ".rst" in file and file.split('/')[-1] not in ["array.rst", "container.rst"]]
     files.sort()
     toctree_dict[submodule] = files
-    write_header_to_rst(file_path, title, module_name)
     append_toctree_to_rst(toctree_dict, file_path, title)
 
 
