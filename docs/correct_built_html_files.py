@@ -51,15 +51,6 @@ def modify_html_file(html_filepath):
             html_contents = html_contents[0:a_index] + " logo" + html_contents[a_index:]
             res += 5
 
-    # Removing images of the form 1.png, 3.png, etc.
-    # html_contents = "".join(
-    #     [
-    #         char
-    #         for i, char in enumerate(html_contents)
-    #         if not (char.isdigit() and html_contents[i + 1 : i + 5] == ".png")
-    #     ]
-    # )
-
     # Replace 3.14 with pi
     html_contents = html_contents.replace("3.141592653589793", "π")
 
