@@ -508,7 +508,7 @@ def create_rst_files(directory):
         toctree_dict = {toctree_key: toctree_key_values}
         append_toctree_to_rst(toctree_dict, rst_path)
 
-    # Used to create index.rst, but not used currently
+    # Used to create index.rst
     if directory == ROOT_DIR:
         if SUBMODULE_TITLE is not None:
             create_index_rst({"": modules})
