@@ -24,7 +24,7 @@ SUBMODS_TO_STEP = list()
 DISCORD_URL = "https://discord.com/channels/799879767196958751/"
 GITHUB_URL = "https://github.com/unifyai/ivy/discussions/"
 
-discussion_msg =  (".. _`discord`: https://discord.gg/ZVQdvbzNQJ \n" 
+DISCUSSION_MSG =  (".. _`discord`: https://discord.gg/ZVQdvbzNQJ \n" 
                   ".. _`{submoudle_name} discussion`: {github_discssion_link}\n" 
                  ".. _`{submoudle_name} channel`: {discord_channel_link}\n" 
                   "This should have hopefully given you an overview of the {submoudle_name} submodule,"
@@ -35,7 +35,7 @@ with open("partial_source/supported_frameworks.rst") as fw_file:
     SUPPORTED_FRAMEWORKS = fw_file.read()
 
 def write_discussion_links():
-    with open("discussion_links.json", "r") as f:
+    with open("partial_source/discussion_links.json", "r") as f:
         modules = json.load(f)
     for module in modules:
         submodules = modules[module]
@@ -45,7 +45,7 @@ def write_discussion_links():
             discord_channel_url = DISCORD_URL  + submodules[submodule][0]
             github_discussion_url = GITHUB_URL + submodules[submodule][1]
             with open(fpath, "a") as rst_file:
-                rst_file.write(discussion_msg.format(
+                rst_file.write(DISCUSSION_MSG.format(
                     submoudle_name=submodule.replace('_', ' ').title(),
                     github_discssion_link=github_discussion_url,
                     discord_channel_link=discord_channel_url
