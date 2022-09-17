@@ -6,12 +6,12 @@ user="${working_directory[2]}"
 cd "/home/$user/project" || exit
 
 # installing requirements
-pip3 install -r ../requirements/requirements.txt
-if [[ -f ../requirements/optional.txt ]]
+pip3 install -r requirements/requirements.txt
+if [[ -f requirements/optional.txt ]]
 then
     pip3 install torch==1.11.0
     pip3 install torch-scatter==2.0.9
-    pip3 install -r ../requirements/optional.txt
+    pip3 install -r requirements/optional.txt
 fi
 
 # moving to the docs folder
