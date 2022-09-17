@@ -959,3 +959,4 @@ if __name__ == "__main__":
     )
     parsed_args = parser.parse_args()
     main(parsed_args.root_dir, parsed_args.submodules_title)
+    print("RST files created")
