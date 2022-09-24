@@ -6,6 +6,7 @@ import string
 import shutil
 import argparse
 import json
+from supported_devices import get_flags
 
 # These directories are not explored recursively while generating content for it.
 EXCLUDED_MODULES = ["exceptions", "library_getter", "setup", "__init__"]
@@ -19,8 +20,6 @@ SUBMOD_ORDERS = dict()
 SUBMODS_TO_SKIP = list()
 SUBMODS_TO_STEP = list()
 
-
-
 DISCORD_URL = "https://discord.com/channels/799879767196958751/"
 GITHUB_URL = "https://github.com/unifyai/ivy/discussions/"
 
@@ -30,6 +29,28 @@ DISCUSSION_MSG =  (".. _`discord`: https://discord.gg/ZVQdvbzNQJ \n"
                   "This should have hopefully given you an overview of the {submoudle_name} submodule,"
                   "If you're ever unsure of how best to proceed, please feel free to engage with the `{submoudle_name} discussion`_,"
                   "or reach out on `discord`_ in the `{submoudle_name} channel`_!")
+
+DEVICE_SUPPORT_STR = """
+.. list-table:: Device Support
+   :widths: 20 20 20 20 20
+   :header-rows: 1
+
+   * - Device
+     - JAX
+     - NumPy
+     - TensorFlow
+     - PyTorch
+   * - CPU
+     - {}
+     - {}
+     - {}
+     - {}
+   * - GPU
+     - {}
+     - {}
+     - {}
+     - {}
+"""
 
 with open("partial_source/supported_frameworks.rst") as fw_file:
     SUPPORTED_FRAMEWORKS = fw_file.read()
@@ -475,6 +496,10 @@ def create_rst_files(directory):
                 extension = " array"
             elif "container_methods" in function_filepath:
                 extension = " container"
+            flags, valid = get_flags(func_name)
+            table = ""
+            if valid:
+                table = DEVICE_SUPPORT_STR.format(*flags)
             with open(function_filepath, "w+") as file:
                 file.write(
                     func_name
@@ -482,7 +507,12 @@ def create_rst_files(directory):
                     + "\n"
                     + "=" * len(func_name + extension)
                     + "\n\n"
-                    ".. autofunction:: " + dotted_func + "\n" + supported_fw_str
+                    ".. autofunction:: "
+                    + dotted_func
+                    + "\n"
+                    + table
+                    + "\n"
+                    + supported_fw_str
                 )
 
         # Write class rst files
