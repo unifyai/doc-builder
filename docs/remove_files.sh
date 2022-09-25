@@ -12,6 +12,7 @@ rm -rf build/array/array_methods
 rm -rf build/container/container_methods
 rm -rf ../ivy/array/array_methods.py
 rm -rf ../ivy/container/container_methods.py
+rm -rf supported_devices.py
 cd partial_source || exit
 rm -rf _static
 cd images || exit
