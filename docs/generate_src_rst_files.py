@@ -971,7 +971,7 @@ def main(root_dir, submodules_title):
         # Move the stateful, array and container folders inside the classes folder
         move_folders_to_classes()
 
-    write_discussion_links()
+        write_discussion_links()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
