@@ -10,6 +10,7 @@ import logging
 try:
     from supported_devices import get_flags
 except Exception as e:
+    get_flags = lambda x: (), False
     logging.warning("supported_device.py does not exist")
 
 # These directories are not explored recursively while generating content for it.
