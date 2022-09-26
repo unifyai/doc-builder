@@ -9,7 +9,7 @@ import json
 import logging
 try:
     from supported_devices import get_flags
-except Exception as e:
+except (ImportError, ModuleNotFoundError) as e:
     get_flags = lambda x: (), False
     logging.warning("supported_device.py does not exist")
 
