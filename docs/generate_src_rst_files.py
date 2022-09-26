@@ -6,7 +6,11 @@ import string
 import shutil
 import argparse
 import json
-from supported_devices import get_flags
+import logging
+try:
+    from supported_devices import get_flags
+except Exception as e:
+    logging.warning("supported_device.py does not exist")
 
 # These directories are not explored recursively while generating content for it.
 EXCLUDED_MODULES = ["exceptions", "library_getter", "setup", "__init__"]
