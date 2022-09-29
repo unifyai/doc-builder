@@ -518,8 +518,6 @@ def create_rst_files(directory):
                     ".. autofunction:: "
                     + dotted_func
                     + "\n"
-                    + table
-                    + "\n"
                     + supported_fw_str
                 )
 
