@@ -291,11 +291,11 @@ def modify_html_file(html_filepath):
                     code_index -= 2
                 html_contents_modded = (
                     html_contents_modded[0:code_index]
-                    + '@' * (code_end - code_index + 1)
+                    + '<doc-builder-tensor-placeholder>' * (code_end - code_index + 1)
                     + html_contents_modded[code_end + 1 :]
                 )
 
-    html_contents_modded = html_contents_modded.replace("@", "")
+    html_contents_modded = html_contents_modded.replace("<doc-builder-tensor-placeholder>", "")
     with open(html_filepath, "w") as file:
         file.write(html_contents_modded)
 
