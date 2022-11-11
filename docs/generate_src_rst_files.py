@@ -421,7 +421,6 @@ def create_rst_files(directory):
     ]
     # get classes and functions for these modules
     for module in modules:
-        print(module) # TODO: REMOVE
 
         # determine number of submodule folders to traverse
         full_rel_path = module[repo_location + name_len_p1 :]
