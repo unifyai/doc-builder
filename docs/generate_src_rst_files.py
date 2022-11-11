@@ -29,11 +29,11 @@ IVY_ONLY = False
 DISCORD_URL = "https://discord.com/channels/799879767196958751/"
 
 DISCUSSION_MSG =  (".. _`discord`: https://discord.gg/ZVQdvbzNQJ \n" 
-                  ".. _`{submoudle_name} forum`: {discord_forum_link}\n" 
-                 ".. _`{submoudle_name} channel`: {discord_channel_link}\n" 
-                  "This should have hopefully given you an overview of the {submoudle_name} submodule,"
+                  ".. _`{submodule_name} forum`: {discord_forum_link}\n" 
+                 ".. _`{submodule_name} channel`: {discord_channel_link}\n" 
+                  "This should have hopefully given you an overview of the {submodule_name} submodule,"
                   "If you have any questions, please feel free to reach out on our "
-                  "`discord`_ in the `{submoudle_name} channel`_ or in the `{submoudle_name} forum`_!")
+                  "`discord`_ in the `{submodule_name} channel`_ or in the `{submodule_name} forum`_!")
 
 DEVICE_SUPPORT_STR = """
 .. list-table:: Device Support
@@ -71,7 +71,7 @@ def write_discussion_links():
             discord_forum_url = DISCORD_URL + submodules[submodule][1]
             with open(fpath, "a") as rst_file:
                 rst_file.write(DISCUSSION_MSG.format(
-                    submoudle_name=submodule.replace('_', ' '),
+                    submodule_name=submodule.replace('_', ' '),
                     discord_forum_link=discord_forum_url,
                     discord_channel_link=discord_channel_url
                 ))
