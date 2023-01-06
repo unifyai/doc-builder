@@ -1119,7 +1119,7 @@ def main(root_dir, submodules_title):
     if IVY_ONLY:
         # To restructure experimental to show them under the right categories
         restructure_experimental(
-            os.path.join(ROOT_DIR, "functional", "experimental"),
+            os.path.join(ROOT_DIR, "functional", "ivy", "experimental"),
             os.path.join(ROOT_DIR, "functional", "ivy"),
         )
         restructure_experimental(
