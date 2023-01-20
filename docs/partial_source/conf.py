@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'Ivy'
-copyright = '2020-2022, Ivy Team'
+copyright = '2020-2023, Ivy Team'
 author = 'Ivy Team'
 
 # The full version, including alpha/beta/rc tags
