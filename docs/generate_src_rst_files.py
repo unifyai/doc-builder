@@ -612,8 +612,9 @@ def create_rst_files(directory):
         append_toctree_to_rst(toctree_dict, new_filepath)
 
         # Update logo path for supported_frameworks
+        num_level_up = directory.count("/") + ('ivy/container/' in module or 'ivy/array/' in module)
         supported_fw_str = SUPPORTED_FRAMEWORKS.replace(
-            "logos", "../" * directory.count("/") + "logos"
+            "logos", "../" * num_level_up + "logos"
         )
 
         # Write function rst files
