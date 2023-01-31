@@ -93,11 +93,11 @@ def generate_test_rst():
 
 
 def get_index_tree():
-    ret = "\n.. toctree::\n\t:hidden:\n\t:maxdepth: -1\n\t:caption: Testing\n\n"
+    files = []
     for file in sorted(os.listdir(path_to_generate_in)):
         if file.endswith(".rst"):
-            ret += f"\thelpers/{file}\n"
-    return ret
+            files.append(file)
+    return files
 
 
 def generate():
