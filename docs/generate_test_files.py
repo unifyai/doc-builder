@@ -82,7 +82,7 @@ def generate_test_rst():
     for root, dirs, files in os.walk(real_path):
         if root.endswith("__pycache__"):
             continue
-        dotted_namespace = root[root.find("ivy")+4:].replace("/", ".")
+        dotted_namespace = root[root.find("ivy_tests"):].replace("/", ".")
         for name in dirs:
             if name == "__pycache__":
                 continue
