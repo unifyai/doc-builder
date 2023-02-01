@@ -5,3 +5,15 @@
 **/.idea/markdown-navigator*
 .run
 .idea/*!/.idea/
+!/.idea/
+!/.idea/inspectionProfiles/
+
+!/.idea/workspace.xml
+
+!/.idea/vcs.xml
+
+!/.idea/doc-builder.iml
+
+!/.idea/modules.xml
+
+!/.idea/runConfigurations/
