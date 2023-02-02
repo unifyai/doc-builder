@@ -1079,25 +1079,12 @@ def main(root_dir, submodules_title):
             with open(submods_path, "r") as file:
                 return [line.replace("\n", "") for line in file.readlines()[1:]]
 
+
+    # These are the submodules which need to be skipped altogether while documentation generation
     global SUBMODS_TO_SKIP, SUBMODS_TO_STEP
     SUBMODS_TO_SKIP = submods_list_init("submods_to_skip.txt")
     SUBMODS_TO_STEP = submods_list_init("submods_to_step.txt")
 
-
-    # # These are the submodules which need to be skipped altogether while documentation generation
-    # submods_to_skip_path = os.path.join(THIS_DIR, "submods_to_skip.txt")
-    # if os.path.exists(submods_to_skip_path):
-    #     global SUBMODS_TO_SKIP
-    #     with open(submods_to_skip_path, "r") as file:
-    #         SUBMODS_TO_SKIP = [line.replace("\n", "") for line in file.readlines()[1:]]
-    #
-    # # These are the submodules to step into (skipping the directory from doc stack)
-    # # This means they won't have their own index page
-    # submods_to_step_path = os.path.join(THIS_DIR, "submods_to_step.txt")
-    # if os.path.exists(submods_to_step_path):
-    #     global SUBMODS_TO_STEP
-    #     with open(submods_to_step_path, "r") as file:
-    #         SUBMODS_TO_STEP = [line.replace("\n", "") for line in file.readlines()[1:]]
 
     # These are the submodules to process irrespective of alphabetical order
     submod_orders_path = os.path.join(THIS_DIR, "submod_orders.txt")
