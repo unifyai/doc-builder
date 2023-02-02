@@ -106,9 +106,9 @@ def remove_absolute_img_links(readme_contents):
         new_line = line
         squashed_line = line.replace(" ", "")
         if (
-            len(squashed_line) >= 28
-            and squashed_line[0:28] == "..image::https://github.com/"
-            and "docs/partial_source" in squashed_line
+                len(squashed_line) >= 28
+                and squashed_line[0:28] == "..image::https://github.com/"
+                and "docs/partial_source" in squashed_line
         ):
             pre, post = line.split("docs/partial_source")
             pre = pre.split("https")[0]
@@ -199,9 +199,9 @@ def append_toctree_to_rst(toctree_dict, rst_path, caption=None, newlines=True):
             cap = "Functions"
 
         str_to_write += (
-            "\n.. toctree::\n   :hidden:\n   :maxdepth: -1\n   :caption: "
-            + cap
-            + "\n\n"
+                "\n.. toctree::\n   :hidden:\n   :maxdepth: -1\n   :caption: "
+                + cap
+                + "\n\n"
         )
         for rst_filename in list_of_rsts:
             str_to_write += "   " + os.path.join(key, rst_filename) + "\n"
@@ -243,8 +243,8 @@ def filter_code(all_code, pattern):
     if len(intervals):
         final_intervals = merge_intervals(intervals)
         for interval in final_intervals:
-            other_code += all_code[interval[0] : interval[1]] + "\n"
-            setup_code += all_code[start : interval[0]] + "\n"
+            other_code += all_code[interval[0]: interval[1]] + "\n"
+            setup_code += all_code[start: interval[0]] + "\n"
             start = interval[1]
     setup_code += all_code[start:]
     return setup_code, other_code
@@ -275,7 +275,7 @@ def format_docstring(docstring, method=False):
                     inside_example = True
                     first = False
             elif not line.startswith("{}... ".format(spaces)) and not line.startswith(
-                "{} ".format(spaces)
+                    "{} ".format(spaces)
             ):
                 inside_example = False
         examples = "\n".join(lines)
@@ -291,27 +291,27 @@ def get_func_after_processing(code, matches, method=False):
     offset = 0
     method_strs = ""
     for match in matches:
-        method_str = code[match.span()[0] + offset : match.span()[1] + offset]
+        method_str = code[match.span()[0] + offset: match.span()[1] + offset]
         ind = match.span()[1] + offset
         end = ind
         if code[ind:].startswith(spaces + '"""'):
             end_offset = len(spaces) + 3
-            end = ind + end_offset + code[ind + end_offset :].find('"""')
+            end = ind + end_offset + code[ind + end_offset:].find('"""')
             new_docstring = format_docstring(
-                code[ind + end_offset : end], method=method
+                code[ind + end_offset: end], method=method
             )
             method_str += '        """{}"""\n'.format(new_docstring)
             offset += len(new_docstring) - (end - ind - end_offset)
-            code = code[0 : ind + end_offset] + new_docstring + code[end:]
+            code = code[0: ind + end_offset] + new_docstring + code[end:]
             end = end + len(new_docstring) - (end - ind - end_offset) + 4
         func_end = code[end:]
         end_pattern = re.compile(r"({}.*\n)*".format(spaces))
         match = end_pattern.match(func_end)
-        method_str += func_end[match.start() : match.end()]
+        method_str += func_end[match.start(): match.end()]
         code = (
-            code[0 : end + match.start()]
-            + "{}pass\n".format(spaces)
-            + code[end + match.end() :]
+                code[0: end + match.start()]
+                + "{}pass\n".format(spaces)
+                + code[end + match.end():]
         )
         offset += len("{}pass\n".format(spaces)) - (match.end() - match.start())
         method_strs += method_str + "\n"
@@ -337,7 +337,7 @@ def add_array_and_container_code(module_str, module_path, dotted_namespace):
     setup_statements = setup_code.split("\n")
     func_code_lines, class_code_lines = func_code.split("\n"), class_code.split("\n")
     func_code_lines += priv_func_code.split("\n")
-    folder = module_path[0 : module_path.rfind("/")]
+    folder = module_path[0: module_path.rfind("/")]
     file = None
     file_to_modify = {
         ".array.": os.path.join(folder, "array_methods.py"),
@@ -421,9 +421,10 @@ def restructure_experimental(path_list):
             code_lines += ["\n"] + f.readlines()
     for i, line in enumerate(code_lines):
         if "from __future__" in line:
-            code_lines = [line] + code_lines[0:i] + code_lines[i + 1 :]
+            code_lines = [line] + code_lines[0:i] + code_lines[i + 1:]
     with open(experimental_functions_path, "w") as f:
         f.writelines(code_lines)
+
 
 def add_instance_and_static_methods(directory):
     # get contents of directory, here directory refers to the ivy directory
@@ -464,16 +465,16 @@ def add_instance_and_static_methods(directory):
     for module in modules:
 
         # determine number of submodule folders to traverse
-        full_rel_path = module[repo_location + name_len_p1 :]
+        full_rel_path = module[repo_location + name_len_p1:]
         num_rsts_to_create = full_rel_path.count("/") + 1
 
         for i in range(num_rsts_to_create):
             # determine number of submodule folders to traverse
-            full_rel_path = module[repo_location + name_len_p1 :]
+            full_rel_path = module[repo_location + name_len_p1:]
 
             # Dotted namespace
             dotted_namespace = "/".join(
-                module[repo_location:-3].split("/")[0 : i + 3]
+                module[repo_location:-3].split("/")[0: i + 3]
             ).replace("/", ".")
 
         with open(module, errors="replace") as file:
@@ -519,7 +520,7 @@ def create_rst_files(directory):
 
     # Extracting the folder name from the repo path
     doc_save_dir = os.path.join(
-        "autogenerated_source", directory[repo_location + name_len_p1 :]
+        "autogenerated_source", directory[repo_location + name_len_p1:]
     )
 
     # Creating a folder with that name inside autogenerated_source
@@ -553,12 +554,12 @@ def create_rst_files(directory):
     for module in modules:
 
         # determine number of submodule folders to traverse
-        full_rel_path = module[repo_location + name_len_p1 :]
+        full_rel_path = module[repo_location + name_len_p1:]
         num_rsts_to_create = full_rel_path.count("/") + 1
         for i in range(num_rsts_to_create):
 
             # relative path
-            rel_path = "/".join(full_rel_path.split("/")[0 : i + 2])
+            rel_path = "/".join(full_rel_path.split("/")[0: i + 2])
 
             # This prevents creation of folder structure for submodules to be stepped
             if rel_path in SUBMODS_TO_STEP:
@@ -568,13 +569,13 @@ def create_rst_files(directory):
             # Every module will be represented by a folder which will contain rst files for all its functions and
             # an rst file which will use all rst files in that folder to generate the overall markup
             new_filepath = (
-                os.path.join("autogenerated_source", rel_path).replace(".py", "")
-                + ".rst"
+                    os.path.join("autogenerated_source", rel_path).replace(".py", "")
+                    + ".rst"
             )
 
             # Dotted namespace
             dotted_namespace = "/".join(
-                module[repo_location:-3].split("/")[0 : i + 3]
+                module[repo_location:-3].split("/")[0: i + 3]
             ).replace("/", ".")
 
             # title
@@ -593,11 +594,11 @@ def create_rst_files(directory):
                     + "\n"
                     + "=" * len(module_title)
                     + "\n\n"
-                    ".. automodule:: " + dotted_namespace + "\n"
-                    "    :members:\n"
-                    "    :special-members: __init__\n"
-                    "    :undoc-members:\n"
-                    "    :show-inheritance:\n"
+                      ".. automodule:: " + dotted_namespace + "\n"
+                                                              "    :members:\n"
+                                                              "    :special-members: __init__\n"
+                                                              "    :undoc-members:\n"
+                                                              "    :show-inheritance:\n"
                 )
 
         # Get all function and class names in the module
@@ -614,7 +615,7 @@ def create_rst_files(directory):
         # For every function and class, a separate rst file is created and stored in the module dir
         toctree_dict = {
             module_name: [func_name + ".rst" for func_name in function_names]
-            + [class_name + ".rst" for class_name in class_names]
+                         + [class_name + ".rst" for class_name in class_names]
         }
         append_toctree_to_rst(toctree_dict, new_filepath)
 
@@ -645,7 +646,7 @@ def create_rst_files(directory):
                     + "\n"
                     + "=" * len(func_name + extension)
                     + "\n\n"
-                    ".. autofunction:: " + dotted_func + "\n" + supported_fw_str
+                      ".. autofunction:: " + dotted_func + "\n" + supported_fw_str
                 )
 
         # Write class rst files
@@ -654,7 +655,7 @@ def create_rst_files(directory):
             with open(class_filepath, "w+") as file:
                 file.write(
                     class_name + "\n" + "=" * len(class_name) + "\n\n"
-                    ".. autoclass:: "
+                                                                ".. autoclass:: "
                     + dotted_class
                     + "\n"
                     + "   :members:\n"
@@ -707,7 +708,7 @@ def create_rst_files(directory):
 
 
 def append_instance_content_to_rst(
-    function_type, path, files, file_str, functional_path
+        function_type, path, files, file_str, functional_path
 ):
     functions = []
     for file in files:
@@ -724,7 +725,7 @@ def append_instance_content_to_rst(
         function_name = (function_line.strip("\n").split(" ")[2]).split(".")[-1]
 
         function_index = file_str.find("def {}(".format(function_name))
-        submodule_index = file_str[0 : function_index + 1].rfind("#ivy.")
+        submodule_index = file_str[0: function_index + 1].rfind("#ivy.")
         submodule_name = (file_str[submodule_index:].split("\n")[0]).split(".")[-1]
 
         raw_function_name = str(function_name)
@@ -762,8 +763,8 @@ def append_instance_content_to_rst(
             ][0]
 
         with open(
-            os.path.join(function_dir, file[0:-4] + "_{}.rst".format(function_type)),
-            "w",
+                os.path.join(function_dir, file[0:-4] + "_{}.rst".format(function_type)),
+                "w",
         ) as f:
             for i in range(len(rst_content)):
                 rst_content[i] = rst_content[i].replace("/logos", "/../../logos")
@@ -774,10 +775,10 @@ def append_instance_content_to_rst(
             f.writelines(rst_content)
 
         if not os.path.exists(
-            os.path.join(function_dir, function_name + "_functional.rst")
+                os.path.join(function_dir, function_name + "_functional.rst")
         ):
             with open(
-                os.path.join(function_dir, function_name + "_functional.rst"), "w"
+                    os.path.join(function_dir, function_name + "_functional.rst"), "w"
             ) as f:
                 temp_content = function_file_rst_content.copy()
                 for i in range(len(temp_content)):
@@ -787,9 +788,9 @@ def append_instance_content_to_rst(
                 f.writelines(temp_content)
 
         final_content = (
-            function_file_rst_content[0 : submodule_function_line + 1]
-            + ["\n" + function_line]
-            + function_file_rst_content[submodule_function_line + 1 :]
+                function_file_rst_content[0: submodule_function_line + 1]
+                + ["\n" + function_line]
+                + function_file_rst_content[submodule_function_line + 1:]
         )
 
         with open(os.path.join(submodule_path, function_file), "w") as f:
@@ -857,7 +858,7 @@ def write_header_to_rst(file_path, title, module_name):
     with open(file_path, "w") as f:
         f.write(
             title.capitalize() + "\n" + "=" * len(title) + "\n\n"
-            ".. automodule:: "
+                                                           ".. automodule:: "
             + module_name
             + "\n"
             + "    :members:\n"
@@ -875,17 +876,17 @@ def copy_contents_and_update_path(file_path, copy_from_file, submodule):
     while i < n:
         if ":hidden:" in content[i]:
             content = (
-                content[0 : i + 1]
-                + [content[i].replace("hidden", "titlesonly")]
-                + content[i + 1 :]
+                    content[0: i + 1]
+                    + [content[i].replace("hidden", "titlesonly")]
+                    + content[i + 1:]
             )
             i += 1
             n += 1
         if "/" in content[i]:
             function_file = (
-                "/".join(copy_from_file.split("/")[0:-1])
-                + "/"
-                + content[i].strip(" ").strip("\n")
+                    "/".join(copy_from_file.split("/")[0:-1])
+                    + "/"
+                    + content[i].strip(" ").strip("\n")
             )
             with open(function_file) as f:
                 function_content = f.readlines()
@@ -900,7 +901,7 @@ def copy_contents_and_update_path(file_path, copy_from_file, submodule):
 
 
 def write_header_and_toctree_to_rst(
-    folder_path, file_path, title, module_name, submodule
+        folder_path, file_path, title, module_name, submodule
 ):
     if "data_classes/array.rst" in file_path:
         copy_from_file = file_path.replace(
@@ -998,8 +999,8 @@ def move_folders_to_classes():
         content
         for content in toctree_content
         if ":caption: Array" not in content
-        and ":caption: Container" not in content
-        and ":caption: Stateful" not in content
+           and ":caption: Container" not in content
+           and ":caption: Stateful" not in content
     ]
     index = [
         index
@@ -1009,7 +1010,7 @@ def move_folders_to_classes():
 
     with open(os.path.join(doc_path, "index.rst"), "w") as f:
         f.writelines(result_content)
-        f.writelines(toctree_content[0 : index + 1])
+        f.writelines(toctree_content[0: index + 1])
 
     toctree_dict = {}
     files = [
@@ -1034,7 +1035,7 @@ def move_folders_to_classes():
     )
 
     with open(os.path.join(doc_path, "index.rst"), "a") as f:
-        f.writelines(toctree_content[index + 1 :])
+        f.writelines(toctree_content[index + 1:])
 
 
 def aggregate_experimental(folder):
@@ -1052,7 +1053,7 @@ def aggregate_experimental(folder):
     rst_file = folder + '.rst'
     with open(rst_file) as f:
         content = f.read()
-        header = content[0:content.find('=\n')+2]
+        header = content[0:content.find('=\n') + 2]
     with open(rst_file, 'w') as f:
         f.write('{}\n'.format(header))
         f.write('{}\n'.format(file_str))
@@ -1079,12 +1080,10 @@ def main(root_dir, submodules_title):
             with open(submods_path, "r") as file:
                 return [line.replace("\n", "") for line in file.readlines()[1:]]
 
-
     # These are the submodules which need to be skipped altogether while documentation generation
     global SUBMODS_TO_SKIP, SUBMODS_TO_STEP
     SUBMODS_TO_SKIP = submods_list_init("submods_to_skip.txt")
     SUBMODS_TO_STEP = submods_list_init("submods_to_step.txt")
-
 
     # These are the submodules to process irrespective of alphabetical order
     submod_orders_path = os.path.join(THIS_DIR, "submod_orders.txt")
@@ -1169,7 +1168,7 @@ if __name__ == "__main__":
         "--submodules_title",
         type=str,
         help="The title for the combination of submodules."
-        "Only valid when there are no submodule directories.",
+             "Only valid when there are no submodule directories.",
     )
     parsed_args = parser.parse_args()
     main(parsed_args.root_dir, parsed_args.submodules_title)
