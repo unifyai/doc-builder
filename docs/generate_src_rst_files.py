@@ -406,13 +406,9 @@ def add_array_and_container_code(module_str, module_path, dotted_namespace):
             f.write("{}\n".format(line))
 
 
-restructure_experimental(
-    os.path.join(ROOT_DIR, "functional", "ivy", "experimental"),
-    os.path.join(ROOT_DIR, "functional", "ivy"),
-)
-restructure_experimental(ROOT_DIR, ("functional", "ivy"))
-def restructure_experimental(path, res_path):
-    path = os.path.join(ROOT_DIR, "functional", "ivy", "experimental"),
+def restructure_experimental(path_list):
+    res_path = os.path.join(*path_list)
+    path = os.path.join(res_path, "experimental")
     experimental_functions_path = os.path.join(res_path, "experimental.py")
     python_files = [
         os.path.join(path, file_path)
@@ -428,7 +424,6 @@ def restructure_experimental(path, res_path):
             code_lines = [line] + code_lines[0:i] + code_lines[i + 1 :]
     with open(experimental_functions_path, "w") as f:
         f.writelines(code_lines)
-
 
 def add_instance_and_static_methods(directory):
     # get contents of directory, here directory refers to the ivy directory
@@ -1143,19 +1138,9 @@ def main(root_dir, submodules_title):
 
     if IVY_ONLY:
         # To restructure experimental to show them under the right categories
-        restructure_experimental(
-            os.path.join(ROOT_DIR, "functional", "ivy", "experimental"),
-            os.path.join(ROOT_DIR, "functional", "ivy"),
-        )
-        restructure_experimental(ROOT_DIR, ("functional", "ivy"))
-        restructure_experimental(
-            os.path.join(ROOT_DIR, "array", "experimental"),
-            os.path.join(ROOT_DIR, "array"),
-        )
-        restructure_experimental(
-            os.path.join(ROOT_DIR, "container", "experimental"),
-            os.path.join(ROOT_DIR, "container"),
-        )
+        restructure_experimental([ROOT_DIR, "functional", "ivy"])
+        restructure_experimental([ROOT_DIR, "array"])
+        restructure_experimental([ROOT_DIR, "container"])
 
         # To add all instance methods into another file.
         add_instance_and_static_methods(root_dir)
