@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/doc-builder.iml" filepath="$PROJECT_DIR$/.idea/doc-builder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ivy/.idea/ivy.iml" filepath="$PROJECT_DIR$/../ivy/.idea/ivy.iml" />
     </modules>
   </component>
 </project>
