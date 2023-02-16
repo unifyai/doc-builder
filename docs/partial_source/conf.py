@@ -106,3 +106,6 @@ typehints_use_rtype = True
 typehints_defaults = 'braces-after'
 simplify_optional_unions = False
 typehints_formatter = None
+
+# toc
+toc_object_entries = False
