@@ -64,6 +64,16 @@ html_css_files = [
     'css/custom.css',
 ]
 
+html_theme_options = {
+   "logo": {
+      "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",
+      "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",
+   },
+   "navbar_align": "left",
+}
+
+html_title = "Ivy Documentation"
+
 autodoc_member_order = 'alphabetical'
 
 suppress_warnings = []
