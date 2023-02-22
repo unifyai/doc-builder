@@ -145,3 +145,8 @@ dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.
 .navbar-brand {
   font-size: 0.2rem;
 }
+
+.dropdown-menu.show {
+  overflow: auto;
+  max-height: 75vh;
+}
