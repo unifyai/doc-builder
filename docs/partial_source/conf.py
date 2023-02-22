@@ -70,6 +70,12 @@ html_theme_options = {
       "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",
    },
    "navbar_align": "left",
+   "header_links_before_dropdown": 8,
+   "secondary_sidebar_items": [],
+}
+
+html_sidebars = {
+   "**": ["sidebar-nav-bs", "page-toc"]
 }
 
 html_title = "Ivy Documentation"
