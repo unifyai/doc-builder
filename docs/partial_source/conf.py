@@ -53,7 +53,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'pydata_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -63,6 +63,24 @@ html_static_path = ['_static']
 html_css_files = [
     'css/custom.css',
 ]
+
+html_theme_options = {
+   "navbar_align": "left",
+   "header_links_before_dropdown": 8,
+   "secondary_sidebar_items": [],
+   "logo": {
+      "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",
+      "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",
+   },
+   "github_url": "https://github.com/unifyai/ivy",
+   "twitter_url": "https://twitter.com/letsunifyai",
+}
+
+html_sidebars = {
+   "**": ["sidebar-nav-bs", "page-toc"]
+}
+
+html_title = "Ivy Documentation"
 
 autodoc_member_order = 'alphabetical'
 
