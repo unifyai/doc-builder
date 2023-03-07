@@ -75,6 +75,14 @@ def modify_html_file(html_filepath):
         if file_to_check in replace_dict:
             html_contents = html_contents.replace("<title>&lt;no title&gt; &#8212;", "<title>{} &#8212;".format(replace_dict[file_to_check]))
 
+    functions_index = html_contents.find("functional/ivy.html")
+    if functions_index != -1:
+        html_contents = html_contents.replace("functional/ivy.html", "functional/ivy/activations.html")
+
+    functions_index = html_contents.find("../ivy.html")
+    if functions_index != -1:
+        html_contents = html_contents.replace("../ivy.html", "functional/ivy/activations.html")
+
     # Read all ivy modules for which markup is generated
     with open(os.path.join(this_dir, "ivy_modules.txt"), "r") as f:
         module_names = [line.replace("\n", "") for line in f.readlines()]
