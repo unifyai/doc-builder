@@ -81,7 +81,7 @@ def modify_html_file(html_filepath):
 
     functions_index = html_contents.find("../ivy.html")
     if functions_index != -1:
-        html_contents = html_contents.replace("../ivy.html", "functional/ivy/activations.html")
+        html_contents = html_contents.replace("../ivy.html", "../../functional/ivy/activations.html")
 
     # Read all ivy modules for which markup is generated
     with open(os.path.join(this_dir, "ivy_modules.txt"), "r") as f:
