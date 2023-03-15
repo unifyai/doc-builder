@@ -187,6 +187,6 @@ typehints_formatter = None
 
 # Import an overriding config file
 try:
-    import partial_conf
+    from docs.partial_conf import *
 except ImportError:
     pass
