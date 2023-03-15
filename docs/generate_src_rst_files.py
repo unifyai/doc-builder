@@ -158,6 +158,8 @@ def create_index_rst(sub_contents_dict):
     for key, value in sub_contents_dict.items():
         new_key = key.split("/")[-1]
         new_value = [item.split("/")[-1].replace(".py", "") + ".rst" for item in value]
+        # remove private submodules
+        new_value = [val for val in new_value if not val.startswith("_")]
         toctree_dict[new_key] = new_value
 
     if SUBMODULE_TITLE is not None:

@@ -61,7 +61,6 @@ def modify_html_file(html_filepath):
     # Fix navbar <no title> issue
     replace_dict = {
         "ivy.html": "Functions",
-        "_importlib.html": "Importlib",
     }
     no_title_exist = html_contents.find("<no title>")
     while no_title_exist != -1:
