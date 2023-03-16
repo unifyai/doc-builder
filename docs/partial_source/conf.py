@@ -68,8 +68,7 @@ html_theme_options = {
    "navbar_center": [],
    "header_links_before_dropdown": 100,
    "secondary_sidebar_items": [],
-   "show_nav_level": 10,
-   "show_toc_level": 4,
+   "show_nav_level": 1,
    "navigation_depth": 10,
    "logo": {
       "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",
