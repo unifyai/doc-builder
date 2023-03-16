@@ -58,30 +58,6 @@ def modify_html_file(html_filepath):
     # This gets added to the markup in cases of hyperlinks where the line size gets too long
     html_contents = html_contents.replace("# noqa", "")
 
-    # Fix navbar <no title> issue
-    replace_dict = {
-        "ivy.html": "Functions",
-    }
-    no_title_exist = html_contents.find("<no title>")
-    while no_title_exist != -1:
-        for to_replace in replace_dict:
-            html_contents = html_contents.replace("<no title>", replace_dict[to_replace], 1)
-        no_title_exist = html_contents.find("<no title>")
-
-    meta_index = html_contents.find("<title>&lt;no title&gt; &#8212;")
-    if meta_index != -1:
-        file_to_check = html_filepath.split("/")[-1]
-        if file_to_check in replace_dict:
-            html_contents = html_contents.replace("<title>&lt;no title&gt; &#8212;", "<title>{} &#8212;".format(replace_dict[file_to_check]))
-
-    functions_index = html_contents.find("functional/ivy.html")
-    if functions_index != -1:
-        html_contents = html_contents.replace("functional/ivy.html", "functional/ivy/activations.html")
-
-    functions_index = html_contents.find("../ivy.html")
-    if functions_index != -1:
-        html_contents = html_contents.replace("../ivy.html", "../../functional/ivy/activations.html")
-
     # Read all ivy modules for which markup is generated
     with open(os.path.join(this_dir, "ivy_modules.txt"), "r") as f:
         module_names = [line.replace("\n", "") for line in f.readlines()]

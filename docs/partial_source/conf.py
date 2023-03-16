@@ -67,7 +67,9 @@ html_theme_options = {
    "navbar_align": "left",
    "navbar_center": [],
    "header_links_before_dropdown": 100,
-   "secondary_sidebar_items": ["sidebar-nav-bs", "page-toc"],
+   "secondary_sidebar_items": [],
+   "show_nav_level": 1,
+   "navigation_depth": 10,
    "logo": {
       "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",
       "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",
@@ -77,7 +79,7 @@ html_theme_options = {
 }
 
 html_sidebars = {
-   "**": ["navbar-nav"]
+   "**": ["sidebar-nav-bs"]
 }
 
 html_title = "Ivy Documentation"
