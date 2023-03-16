@@ -73,6 +73,8 @@ html_theme_options = {
    "logo": {
       "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",
       "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",
+      "link": "https://lets-unify.ai/ivy/",
+      "text": "Documentation",
    },
    "github_url": "https://github.com/unifyai/ivy",
    "twitter_url": "https://twitter.com/letsunifyai",
