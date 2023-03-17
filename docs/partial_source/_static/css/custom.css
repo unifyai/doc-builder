@@ -157,3 +157,8 @@ html {
   overflow: auto;
   max-height: 75vh;
 }
+
+i.fa-chevron-down {
+  display: none;
+  visibility: hidden;
+}
