@@ -3,11 +3,13 @@ rm -rf .nojekyll
 rm -rf correct_built_html_files.py
 rm -rf entrypoint.sh
 rm -rf generate_src_rst_files.py
+rm -rf generate_test_files.py
 rm -rf ivy_modules.txt
 rm -rf make.bat
 rm -rf _make_docs.sh
 rm -rf Makefile
 rm -rf sphinx-build.py
+rm -rf verbose.py
 rm -rf build/array/array_methods
 rm -rf build/container/container_methods
 rm -rf ../ivy/array/array_methods.py
