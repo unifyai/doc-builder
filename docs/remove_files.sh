@@ -37,4 +37,5 @@ if [ -z "$(ls -A logos)" ]; then
 fi
 rm -rf contributing/building_the_docs.rst
 rm -rf conf.py
+rm -rf _templates
 rm -rf supported_frameworks.rst
