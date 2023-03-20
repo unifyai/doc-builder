@@ -19,15 +19,11 @@ if [ -d $1/requirements ]; then
   fi
 else
     pip install -r $1/requirements.txt || exit 1
-    [ -r $1/optional.txt ] && pip install -r $1/optional.txt || exit 1
+    [ -r $1/optional.txt ] && (pip install -r $1/optional.txt || exit 1)
 fi
-
-# Delete any previously generated content
-rm -rf $1/docs/docs
 
 # delete any previously generated pages
 rm -rf $1/docs/build
-
 
 # Backing up the docs folder
 cp -r $1/docs/ $1/docs.old/ || exit 1
