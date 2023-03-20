@@ -48,3 +48,6 @@ rm -rf $1/docs/ || exit 1
 
 mv $1/docs.old/ $1/docs/
 
+# Give read and write permissions to the docs folder, as docker root take ownership of 
+# the files
+chmod -R a+rw $1/docs
