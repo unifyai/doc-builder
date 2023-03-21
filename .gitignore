@@ -4,3 +4,5 @@
 **/.idea/shelf/
 **/.idea/markdown-navigator*
 .run
+
+__pycache__/
