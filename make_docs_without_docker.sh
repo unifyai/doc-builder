@@ -25,25 +25,34 @@ fi
 # delete any previously generated pages
 rm -rf $1/docs/build
 
+function cleanup {
+  echo "Cleaning up"
+  # Restore the original docs
+  rm -rf $1/docs/
+  mv $1/docs.old/ $1/docs/
+  # Give read and write permissions to the docs folder, as docker root take ownership of 
+  # the files
+  chmod -R a+rw $1/docs
+}
+
+function error_exit {
+  echo "Error in building docs"
+  cleanup $1
+  exit 1
+}
+
 # Backing up the docs folder
 cp -r $1/docs/ $1/docs.old/ || exit 1
 
 # syncing ivy folder with the doc-builder folder
-rsync -rav docs/ $1/docs/ || exit 1
+rsync -rav docs/ $1/docs/ || error_exit $1
 
-sphinx-build -b html $1/docs $1/docs/build || exit 1
+sphinx-build -b html $1/docs $1/docs/build || error_exit $1
 
 # Disable Jekyll in GitHub pages
 touch $1/docs/build/.nojekyll
 
 # Move the build to docs.old
-mv $1/docs/build $1/docs.old/build
+mv $1/docs/build $1/docs.old/build || error_exit $1
 
-# Restore the original docs
-rm -rf $1/docs/ || exit 1
-
-mv $1/docs.old/ $1/docs/
-
-# Give read and write permissions to the docs folder, as docker root take ownership of 
-# the files
-chmod -R a+rw $1/docs
+cleanup $1
