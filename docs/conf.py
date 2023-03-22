@@ -39,6 +39,7 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
+    "sphinx_copybutton",
     "docs._ext.custom_autosummary",
     "docs._ext.discussion_linker",
     "docs._ext.custom_builder",
@@ -138,6 +139,11 @@ typehints_use_rtype = True
 typehints_defaults = "braces-after"
 simplify_optional_unions = False
 typehints_formatter = None
+
+copybutton_prompt_text = ">>> "
+# By default .gp is also excluded, which is the prompt class of sphinx, we want to 
+# include it for copybutton_prompt_text to find
+copybutton_exclude = '.linenos'
 
 # Import an overriding config file
 try:
