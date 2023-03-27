@@ -4,7 +4,7 @@
 .. REMOVE_BEFORE_HERE
 .. autosummary::
    :toctree: {{name}}
-   :template: top_level_module.rst
+   :template: {% block template %}top_level_module.rst{% endblock %}
    :caption: {{fullname}}
    :substitute-caption:
    :hide-table:
