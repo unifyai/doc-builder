@@ -105,9 +105,6 @@ rsync -rav docs/ $1/docs/ || error_exit $1
 
 sphinx-build -b html $1/docs $1/docs/build || error_exit $1
 
-# Disable Jekyll in GitHub pages
-touch $1/docs/build/.nojekyll
-
 if [ $cleanup = true ]; then
   # Move the build to docs.old
   mv $1/docs/build $1/docs.old/build || error_exit $1
