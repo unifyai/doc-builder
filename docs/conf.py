@@ -70,7 +70,7 @@ html_css_files = [
 html_theme_options = {
     "navbar_center": ["empty"],
     "header_links_before_dropdown": 100,
-    "secondary_sidebar_items": ["sidebar-nav-bs", "page-toc"],
+    "secondary_sidebar_items": ["page-toc"],
     "logo": {
         "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",  # noqa: E501
         "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",  # noqa: E501
