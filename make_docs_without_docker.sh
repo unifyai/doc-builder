@@ -10,14 +10,16 @@ usage() {
   cat << EOF >&2
 Usage: $PROGNAME [--no-cleanup] [--git-add] <project path>
 
---no-cleanup : Disable the backup/cleanup procedure
---git-add    : Stage changed files before generating the docs
+--no-cleanup                : Disable the backup/cleanup procedure
+--git-add                   : Stage changed files before generating the docs
+--skip-dependencies-install : Skip installing dependencies using pip
 EOF
   exit 0
 }
 
 cleanup=true
 gitadd=false
+installdependencies=true
 
 while [ "${1:-}" != "" ]; do
   case "$1" in
@@ -32,6 +34,10 @@ while [ "${1:-}" != "" ]; do
       gitadd=true
       shift
       ;;
+    "--skip-dependencies-install")
+      installdependencies=false
+      shift
+      ;;
     *)
       break
       ;;
@@ -44,24 +50,26 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
-# install libraries for the doc-builder
-pip install -r ./requirements.txt || exit 1
+if [ $installdependencies = true ]; then
+  # install libraries for the doc-builder
+  pip install -r ./requirements.txt || exit 1
 
-# Run a prebuild script if exists
-[ -x $1/docs/prebuild.sh ] && $1/docs/prebuild.sh
+  # Run a prebuild script if exists
+  [ -x $1/docs/prebuild.sh ] && $1/docs/prebuild.sh
 
-if [ -d $1/requirements ]; then
-  # install libraries for ivy
-  pip install -r $1/requirements/requirements.txt || exit 1
-  if [[ $(arch) == 'arm64' ]]; then
-    pip install -r $1/requirements/optional_m1_1.txt || exit 1
-    pip install -r $1/requirements/optional_m1_2.txt || exit 1
+  if [ -d $1/requirements ]; then
+    # install libraries for ivy
+    pip install -r $1/requirements/requirements.txt || exit 1
+    if [[ $(arch) == 'arm64' ]]; then
+      pip install -r $1/requirements/optional_m1_1.txt || exit 1
+      pip install -r $1/requirements/optional_m1_2.txt || exit 1
+    else
+      pip install -r $1/requirements/optional.txt || exit 1
+    fi
   else
-    pip install -r $1/requirements/optional.txt || exit 1
-  fi
-else
-    pip install -r $1/requirements.txt || exit 1
-    [ -r $1/optional.txt ] && (pip install -r $1/optional.txt || exit 1)
+      pip install -r $1/requirements.txt || exit 1
+      [ -r $1/optional.txt ] && (pip install -r $1/optional.txt || exit 1)
+fi
 fi
 
 # delete any previously generated pages
