@@ -30,9 +30,7 @@ class SkippableMethodDocumenter(MethodDocumenter):
 
         super().add_directive_header(sig)
 
-    def add_content(self,
-                    more_content: StringList | None
-                    ) -> None:
+    def add_content(self, more_content: StringList) -> None:
         if _skip(self.object, self.env.config.skippable_method_attributes):
             return
 
