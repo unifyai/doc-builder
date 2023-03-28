@@ -43,6 +43,7 @@ extensions = [
     "docs._ext.custom_autosummary",
     "docs._ext.discussion_linker",
     "docs._ext.custom_builder",
+    "docs._ext.skippable_function",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
