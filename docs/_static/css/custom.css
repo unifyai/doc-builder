@@ -159,8 +159,7 @@ html {
 }
 
 i.fa-chevron-down {
-  display: none;
-  visibility: hidden;
+  transition: ease-in-out, transform 0.5s;
 }
 
 html[data-theme="dark"] .highlight button.copybtn:hover {
