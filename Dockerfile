@@ -14,6 +14,10 @@ RUN mkdir /doc-builder
 WORKDIR /doc-builder
 
 COPY . /doc-builder
+
+# TODO remove this when sphinx_design is on pypi
+RUN apt-get install -y git
+
 RUN pip3 install -r requirements.txt
 
 RUN mkdir /project

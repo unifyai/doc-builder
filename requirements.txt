@@ -9,3 +9,5 @@ sphinxcontrib-serializinghtml==1.1.5
 sphinx-autodoc-typehints==1.19.2
 sphinx-copybutton==0.5.1
 sphinx_design==0.3.0
+# TODO change it with sphinx-design when it is released
+git+https://github.com/executablebooks/sphinx-design.git@3d0db63f06a8f59a5ea1067e0f43782464eeff83
