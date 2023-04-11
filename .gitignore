@@ -4,5 +4,6 @@
 **/.idea/shelf/
 **/.idea/markdown-navigator*
 .run
+.ivy
 
 __pycache__/
