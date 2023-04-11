@@ -44,8 +44,8 @@ extensions = [
     "sphinx_design",
     "docs._ext.custom_autosummary",
     "docs._ext.discussion_linker",
-    "docs._ext.custom_builder",
     "docs._ext.skippable_function",
+    "docs._ext.ivy_data",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

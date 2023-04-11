@@ -1,6 +1,6 @@
 {% extends "top_level_module.rst" %}
 
-{% block custom_content %}
+{% block toctree %}
 {% if modules|length != 0 %}
 .. autosummary::
   :toctree: {{fullname}}
@@ -11,7 +11,3 @@
 {% endfor %}
 {% endif -%}
 {% endblock %}
-
-
-{# replace template with last_level_toc.rst to generate autosummary for sub module and then automodule #}
-{# replace template with top_level_module.rst to generate automodule for sub module #}
