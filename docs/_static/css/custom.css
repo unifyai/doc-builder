@@ -159,10 +159,13 @@ html {
 }
 
 i.fa-chevron-down {
-  display: none;
-  visibility: hidden;
+  transition: ease-in-out, transform 0.5s;
 }
 
 html[data-theme="dark"] .highlight button.copybtn:hover {
   background-color: rgba(158, 158, 158, 0.377);
+}
+
+.autosummary.table {
+  margin-top: 2.5em;
 }
