@@ -165,3 +165,7 @@ i.fa-chevron-down {
 html[data-theme="dark"] .highlight button.copybtn:hover {
   background-color: rgba(158, 158, 158, 0.377);
 }
+
+.autosummary.table {
+  margin-top: 2.5em;
+}
