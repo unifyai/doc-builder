@@ -8,11 +8,14 @@ PROGNAME=$0
 
 usage() {
   cat << EOF >&2
-Usage: $PROGNAME [--no-cleanup] [--git-add] <project path>
+Usage: $PROGNAME [options] <project path>
 
---no-cleanup                : Disable the backup/cleanup procedure
---git-add                   : Stage changed files before generating the docs
---skip-dependencies-install : Skip installing dependencies using pip
+-h, --help                      : Show this help
+-C, --no-cleanup                : Disable the backup/cleanup procedure
+-g, --git-add                   : Stage changed files before generating the docs
+-s, --skip-dependencies-install : Skip installing dependencies using pip
+-j, --jobs N                    : Build in parallel with N processes where possible (special value "auto" will set N to cpu-count)
+-D setting=value                : Override a setting in conf.py
 EOF
   exit 0
 }
@@ -20,23 +23,32 @@ EOF
 cleanup=true
 gitadd=false
 installdependencies=true
+build_args=""
 
 while [ "${1:-}" != "" ]; do
   case "$1" in
     "-h" | "--help")
       usage
       ;;
-    "--no-cleanup")
+    "-C" | "--no-cleanup")
       cleanup=false
       shift
       ;;
-    "--git-add")
+    "-g" | "--git-add")
       gitadd=true
       shift
       ;;
-    "--skip-dependencies-install")
+    "-s" | "--skip-dependencies-install")
       installdependencies=false
       shift
+      ;;
+    "-j" | "--jobs")
+      build_args="$build_args $1 $2"
+      shift 2
+      ;;
+    "-D")
+      build_args="$build_args $1 $2"
+      shift 2
       ;;
     *)
       break
@@ -48,6 +60,22 @@ if [ $# -eq 0 ]
   then
     echo "Project directory is required"
     exit 1
+fi
+
+if [[ $1 == -* ]]; then
+  echo "Unknown option $1"
+  exit 1
+fi
+
+if [ $# -gt 1 ]
+  then
+    echo "Too many arguments, only one project directory is required"
+    exit 1
+fi
+
+# If -j is not specified, use all available cores
+if [[ $build_args != *"-j"* ]]; then
+  build_args="$build_args -j auto"
 fi
 
 if [ $installdependencies = true ]; then
@@ -111,7 +139,7 @@ fi
 # syncing ivy folder with the doc-builder folder
 rsync -rav docs/ $1/docs/ || error_exit $1
 
-sphinx-build -b html $1/docs $1/docs/build || error_exit $1
+sphinx-build -b html $build_args $1/docs $1/docs/build || error_exit $1
 
 if [ $cleanup = true ]; then
   # Move the build to docs.old

@@ -18,4 +18,4 @@ COPY . /doc-builder
 RUN pip3 install -r requirements.txt
 
 RUN mkdir /project
-CMD ./make_docs_without_docker.sh /project
+ENTRYPOINT [ "./docker_entrypoint.sh" ]
