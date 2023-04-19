@@ -69,6 +69,7 @@ html_css_files = [
 
 html_theme_options = {
     "navbar_center": ["empty"],
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
@@ -87,6 +88,10 @@ html_theme_options = {
             "icon": "fa-brands fa-square-twitter",
         },
     ],
+    "switcher": {
+        "json_url": "https://lets-unify.ai/docs/versions/ivy.json",
+        "version_match": "dev"
+    }
 }
 
 html_sidebars = {"**": ["custom-toc-tree", "ivy-libraries"]}
