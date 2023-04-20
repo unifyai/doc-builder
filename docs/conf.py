@@ -89,7 +89,6 @@ html_theme_options = {
         },
     ],
     "switcher": {
-        "json_url": "https://lets-unify.ai/docs/versions/ivy.json",
         "version_match": "dev"
     }
 }
