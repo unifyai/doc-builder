@@ -23,7 +23,7 @@ copyright = "2020-2023, Ivy Team"
 author = "Ivy Team"
 
 # The full version, including alpha/beta/rc tags
-release = "1.0"
+release = os.getenv('IVY_VERSION') or "dev"
 
 
 # -- General configuration ---------------------------------------------------
@@ -89,7 +89,7 @@ html_theme_options = {
         },
     ],
     "switcher": {
-        "version_match": "dev"
+        "version_match": release
     }
 }
 
