@@ -145,7 +145,6 @@ dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.
 html {
   --pst-sidebar-font-size: 1.0em;
   --pst-sidebar-header-font-size: 1.0em;
-  --pst-sidebar-secondary: 20rem;
   --pst-sidebar-secondary-font-size: 0.9em;
 }
 
