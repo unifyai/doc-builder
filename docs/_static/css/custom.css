@@ -169,6 +169,7 @@ html[data-theme="dark"] .highlight button.copybtn:hover {
   margin-top: 2.5em;
 }
 
+.mantine-Modal-inner figure,
 #kapa-widget-container figure {
   padding: 0 !important;
 }
