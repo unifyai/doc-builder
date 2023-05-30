@@ -173,3 +173,12 @@ html[data-theme="dark"] .highlight button.copybtn:hover {
 #kapa-widget-container figure {
   padding: 0 !important;
 }
+
+#kapa-widget-container button {
+  background-color: #f5f5f5 !important;
+  color: var(--pst-color-text-base);
+}
+
+html[data-theme="dark"] #kapa-widget-container button {
+  background-color: #212121 !important;
+}
