@@ -67,7 +67,6 @@ html_css_files = [
     "css/custom.css",
 ]
 html_js_files = [
-    "https://widget.kapa.ai/kapa-widget.bundle.js",
     "js/kapa.ai.js",
 ]
 
