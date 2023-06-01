@@ -24,7 +24,10 @@ cleanup=true
 gitadd=false
 installdependencies=true
 build_args=""
+doc_builder_dir=$(dirname $0)
 dependency_installer="install_dependencies.sh"
+
+cd $doc_builder_dir
 
 while [ "${1:-}" != "" ]; do
   case "$1" in
