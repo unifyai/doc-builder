@@ -65,6 +65,7 @@ html_static_path = ["_static"]
 
 html_css_files = [
     "css/custom.css",
+    "https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900"
 ]
 html_js_files = [
     "js/kapa.ai.js",

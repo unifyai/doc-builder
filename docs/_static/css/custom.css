@@ -151,6 +151,34 @@ html {
   --pst-sidebar-header-font-size: 1.0em;
   --pst-sidebar-secondary-font-size: 0.9em;
   --pst-header-height: unset;
+  --pst-font-family-base: 'Inter', var(--pst-font-family-base-system);
+  --pst-font-family-heading: 'Inter', var(--pst-font-family-base-system);
+  --pst-font-weight-heading: 700;
+  --pst-font-color-heading: #0A0C13;
+}
+
+html[data-theme="light"] {
+  --pst-color-primary: #35A835;
+}
+
+html[data-theme="dark"] {
+  --pst-font-color-heading: #E9E9EA;
+  --pst-color-primary: #35A835;
+}
+
+a.current.reference.internal {
+  background: rgba(53, 168, 53, 0.1);
+  padding-left: 10px;
+  margin-left: -10px;
+  border-radius: 8px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--pst-font-color-heading);
+}
+
+nav.bd-docs-nav {
+  padding-right: 24px;
 }
 
 .navbar-header-items__center {
@@ -169,6 +197,10 @@ html {
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+html[data-theme="dark"] .w-nav-link {
+  color: #FFFFFF !important;
 }
 
 .nav-link-header {
@@ -201,6 +233,11 @@ html {
 
 i.fa-chevron-down {
   transition: ease-in-out, transform 0.5s;
+  color: #606264;
+}
+
+label.toctree-toggle:hover {
+  background: unset !important;
 }
 
 html[data-theme="dark"] .highlight button.copybtn:hover {
