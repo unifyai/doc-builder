@@ -65,32 +65,21 @@ html_static_path = ["_static"]
 
 html_css_files = [
     "css/custom.css",
+    "https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900"
 ]
 html_js_files = [
     "js/kapa.ai.js",
 ]
 
 html_theme_options = {
-    "navbar_center": ["empty"],
+    "navbar_center": ["nav-bar-middle"],
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
-        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new.png?raw=true",  # noqa: E501
-        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new_dark.png?raw=true",  # noqa: E501
+        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new.svg?raw=true",  # noqa: E501
+        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new_dark.svg?raw=true",  # noqa: E501
     },
-    "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/unifyai/ivy",
-            "icon": "fa-brands fa-square-github",
-        },
-        {
-            "name": "Twitter",
-            "url": "https://twitter.com/letsunifyai",
-            "icon": "fa-brands fa-square-twitter",
-        },
-    ],
     "switcher": {
         "version_match": release
     }
