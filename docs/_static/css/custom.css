@@ -130,6 +130,10 @@ dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.
   width: 100%;
 }
 
+.navbar {
+  padding: 26px 56px 16px;
+}
+
 @media only screen and (min-width: 900px) {
   .video{
     width: 80%;
@@ -146,10 +150,49 @@ html {
   --pst-sidebar-font-size: 1.0em;
   --pst-sidebar-header-font-size: 1.0em;
   --pst-sidebar-secondary-font-size: 0.9em;
+  --pst-header-height: unset;
+}
+
+@media (min-width: 960px){
+.bd-page-width {
+    max-width: 1240px;
+  }
+}
+
+.nav-menu {
+    float: right;
+    position: relative;
+}
+
+.menu-link-holder,
+.menu-holder {
+    grid-column-gap: 56px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.nav-link-header {
+    flex: 0 auto;
+    padding: 0 !important;
+    line-height: 24px;
+    transition: all .25s ease-out;
+}
+
+.w-nav-link {
+    vertical-align: top;
+    color: #222 !important;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
 }
 
 .navbar-brand {
-  font-size: 0.2rem;
+  padding: 0;
 }
 
 .dropdown-menu.show {
@@ -182,3 +225,4 @@ html[data-theme="dark"] .highlight button.copybtn:hover {
 html[data-theme="dark"] #kapa-widget-container button {
   background-color: #212121 !important;
 }
+
