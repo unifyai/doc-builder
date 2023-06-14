@@ -76,8 +76,8 @@ html_theme_options = {
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
-        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo.png?raw=true",  # noqa: E501
-        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/logo_dark.png?raw=true",  # noqa: E501
+        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new.png?raw=true",  # noqa: E501
+        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new_dark.png?raw=true",  # noqa: E501
     },
     "icon_links": [
         {
