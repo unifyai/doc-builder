@@ -153,10 +153,9 @@ html {
   --pst-header-height: unset;
 }
 
-@media (min-width: 960px){
-.bd-page-width {
-    max-width: 1240px;
-  }
+.navbar-header-items__center {
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .nav-menu {
