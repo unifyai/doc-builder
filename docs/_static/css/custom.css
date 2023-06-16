@@ -130,7 +130,7 @@ dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.
   width: 100%;
 }
 
-.navbar {
+.navbar > div {
   padding: 26px 56px 16px;
 }
 
@@ -150,11 +150,17 @@ html {
   --pst-sidebar-font-size: 1.0em;
   --pst-sidebar-header-font-size: 1.0em;
   --pst-sidebar-secondary-font-size: 0.9em;
-  --pst-header-height: unset;
+  --pst-header-height: 86px;
   --pst-font-family-base: 'Inter', var(--pst-font-family-base-system);
   --pst-font-family-heading: 'Inter', var(--pst-font-family-base-system);
   --pst-font-weight-heading: 700;
   --pst-font-color-heading: #0A0C13;
+}
+
+.navbar-item,
+.navbar-brand {
+  height: calc(var(--pst-header-height) - 16px - 26px) !important;
+  max-height: calc(var(--pst-header-height) - 16px - 26px) !important;
 }
 
 html[data-theme="light"] {
@@ -197,6 +203,21 @@ nav.bd-docs-nav {
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 960px) {
+  .menu-link-holder {
+    flex-wrap: wrap;
+  }
+  .menu-link-holder > a {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .navbar-item:has(.menu-holder) {
+    height: unset !important;
+    max-height: unset !important;
+  }
 }
 
 html[data-theme="dark"] .w-nav-link {

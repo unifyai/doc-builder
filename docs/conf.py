@@ -79,6 +79,7 @@ html_theme_options = {
     "logo": {
         "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new.svg?raw=true",  # noqa: E501
         "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new_dark.svg?raw=true",  # noqa: E501
+        "link": "https://unify.ai",
     },
     "switcher": {
         "version_match": release
