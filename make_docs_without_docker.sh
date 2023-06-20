@@ -24,6 +24,10 @@ cleanup=true
 gitadd=false
 installdependencies=true
 build_args=""
+doc_builder_dir=$(dirname $0)
+dependency_installer="install_dependencies.sh"
+
+cd $doc_builder_dir
 
 while [ "${1:-}" != "" ]; do
   case "$1" in
@@ -85,19 +89,8 @@ if [ $installdependencies = true ]; then
   # Run a prebuild script if exists
   [ -x $1/docs/prebuild.sh ] && $1/docs/prebuild.sh
 
-  if [ -d $1/requirements ]; then
-    # install libraries for ivy
-    pip install -r $1/requirements/requirements.txt || exit 1
-    if [[ $(arch) == 'arm64' ]]; then
-      pip install -r $1/requirements/optional_m1_1.txt || exit 1
-      pip install -r $1/requirements/optional_m1_2.txt || exit 1
-    else
-      pip install -r $1/requirements/optional.txt || exit 1
-    fi
-  else
-      pip install -r $1/requirements.txt || exit 1
-      [ -r $1/optional.txt ] && (pip install -r $1/optional.txt || exit 1)
-fi
+  # run the dependency installer script
+  (cd $1 && [ -x ./$dependency_installer ] && ./$dependency_installer)
 fi
 
 # delete any previously generated pages
