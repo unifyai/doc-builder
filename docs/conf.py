@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import inspect
 
 sys.path.insert(0, os.path.abspath(".."))
 
@@ -35,7 +36,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.linkcode",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx.ext.githubpages",
@@ -150,3 +151,58 @@ try:
     from docs.partial_conf import *
 except ImportError:
     pass
+
+
+def linkcode_resolve(domain, info):
+    if domain != "py":
+        return None
+    if not info["module"]:
+        return None
+
+    modname = info["module"]
+    fullname = info["fullname"]
+
+    submod = sys.modules.get(modname)
+    if submod is None:
+        return None
+
+    obj = submod
+    for part in fullname.split("."):
+        try:
+            obj = getattr(obj, part)
+        except Exception:
+            return None
+
+    try:
+        unwrap = inspect.unwrap
+    except AttributeError:
+        pass
+    else:
+        obj = unwrap(obj)
+
+    fn = None
+    lineno = None
+
+    if fn is None:
+        try:
+            fn = inspect.getsourcefile(obj)
+        except Exception:
+            fn = None
+        if not fn:
+            return None
+
+    try:
+        source, lineno = inspect.getsourcelines(obj)
+    except Exception:
+        lineno = None
+
+    fn = os.path.relpath(fn, start=os.path.dirname(__import__("ivy").__file__))
+
+    if lineno:
+        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
+    else:
+        linespec = ""
+
+    github_url = f"https://github.com/unifyai/ivy/blob/master/ivy/{fn}{linespec}"
+
+    return github_url
