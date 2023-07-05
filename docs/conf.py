@@ -159,17 +159,19 @@ def linkcode_resolve(domain, info):
     if not info["module"]:
         return None
 
-    modname = info["module"]
+    modname_full = info["module"]
     fullname = info["fullname"]
 
-    submod = sys.modules.get(modname)
-    if submod is None:
+    mod_name = modname_full.split(".")[0]
+    repo_name = mod_name.replace("ivy_","") if "ivy_" in mod_name else mod_name
+
+    modname = sys.modules.get(modname_full)
+    if modname is None:
         return None
 
-    obj = submod
     for part in fullname.split("."):
         try:
-            obj = getattr(obj, part)
+            modname = getattr(modname, part)
         except Exception:
             return None
 
@@ -178,31 +180,22 @@ def linkcode_resolve(domain, info):
     except AttributeError:
         pass
     else:
-        obj = unwrap(obj)
-
-    fn = None
-    lineno = None
-
-    if fn is None:
-        try:
-            fn = inspect.getsourcefile(obj)
-        except Exception:
-            fn = None
-        if not fn:
-            return None
+        modname = unwrap(modname)
 
     try:
-        source, lineno = inspect.getsourcelines(obj)
+        fn = inspect.getsourcefile(modname)
+    except Exception:
+        return None
+
+    try:
+        source, lineno = inspect.getsourcelines(modname)
     except Exception:
         lineno = None
 
-    fn = os.path.relpath(fn, start=os.path.dirname(__import__("ivy").__file__))
+    fn = os.path.relpath(fn, start=os.path.dirname(__import__(mod_name).__file__))
 
     if lineno:
         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
-    else:
-        linespec = ""
+    
+    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}"
 
-    github_url = f"https://github.com/unifyai/ivy/blob/master/ivy/{fn}{linespec}"
-
-    return github_url
