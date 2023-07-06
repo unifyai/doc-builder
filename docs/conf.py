@@ -194,6 +194,8 @@ def linkcode_resolve(domain, info):
 
     fn = os.path.relpath(fn, start=os.path.dirname(__import__(mod_name).__file__))
 
+    linespec = ""
+
     if lineno:
         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
     
