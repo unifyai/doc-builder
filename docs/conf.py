@@ -163,7 +163,6 @@ def linkcode_resolve(domain, info):
     fullname = info["fullname"]
 
     mod_name = modname_full.split(".")[0]
-    repo_name = mod_name.replace("ivy_","") if "ivy_" in mod_name else mod_name
 
     modname = sys.modules.get(modname_full)
     if modname is None:
