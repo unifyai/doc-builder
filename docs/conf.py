@@ -158,7 +158,12 @@ def linkcode_resolve(domain, info):
         return None
     if not info["module"]:
         return None
-
+    
+    try:
+        repo_name
+    except Exception:
+        return None
+    
     modname_full = info["module"]
     fullname = info["fullname"]
 
@@ -198,5 +203,5 @@ def linkcode_resolve(domain, info):
     if lineno:
         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
     
-    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}" if repo_name else None
+    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}"
 
