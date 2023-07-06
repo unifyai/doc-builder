@@ -198,5 +198,5 @@ def linkcode_resolve(domain, info):
     if lineno:
         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
     
-    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}"
+    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}" if repo_name else None
 
