@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import inspect
 
 sys.path.insert(0, os.path.abspath(".."))
 
@@ -35,7 +36,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.linkcode",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.napoleon",
     "sphinx.ext.githubpages",
@@ -150,3 +151,57 @@ try:
     from docs.partial_conf import *
 except ImportError:
     pass
+
+
+def linkcode_resolve(domain, info):
+    if domain != "py":
+        return None
+    if not info["module"]:
+        return None
+    
+    try:
+        repo_name
+    except Exception:
+        return None
+    
+    modname_full = info["module"]
+    fullname = info["fullname"]
+
+    mod_name = modname_full.split(".")[0]
+
+    modname = sys.modules.get(modname_full)
+    if modname is None:
+        return None
+
+    for part in fullname.split("."):
+        try:
+            modname = getattr(modname, part)
+        except Exception:
+            return None
+
+    try:
+        unwrap = inspect.unwrap
+    except AttributeError:
+        pass
+    else:
+        modname = unwrap(modname)
+
+    try:
+        fn = inspect.getsourcefile(modname)
+    except Exception:
+        return None
+
+    try:
+        source, lineno = inspect.getsourcelines(modname)
+    except Exception:
+        lineno = None
+
+    fn = os.path.relpath(fn, start=os.path.dirname(__import__(mod_name).__file__))
+
+    linespec = ""
+
+    if lineno:
+        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
+    
+    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}"
+
