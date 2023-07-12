@@ -195,6 +195,9 @@ def linkcode_resolve(domain, info):
         source, lineno = inspect.getsourcelines(modname)
     except Exception:
         lineno = None
+    
+    if fn is None:
+        return None
 
     fn = os.path.relpath(fn, start=os.path.dirname(__import__(mod_name).__file__))
 
