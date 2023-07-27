@@ -134,9 +134,17 @@ rsync -rav docs/ $1/docs/ || error_exit $1
 
 sphinx-build -b html $build_args $1/docs $1/docs/build || error_exit $1
 
+# Convert rst to readme.md
+if [ -f $1/readme.rst ]; then
+    echo "Converting readme.rst to readme.md"
+    pandoc $1/readme.rst -f rst -t markdown -s -o $1/readme.md
+fi
+
 if [ $cleanup = true ]; then
   # Move the build to docs.old
   mv $1/docs/build $1/docs.old/build || error_exit $1
 fi
+
+
 
 cleanup $1
