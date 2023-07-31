@@ -52,6 +52,10 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates", "_html_templates"]
 
+# Enable prefixing in autosectionlabel
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 1
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
