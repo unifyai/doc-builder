@@ -43,6 +43,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinx_copybutton",
     "sphinx_design",
+    "myst_parser",
     "docs._ext.custom_autosummary",
     "docs._ext.discussion_linker",
     "docs._ext.skippable_function",
