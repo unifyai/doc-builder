@@ -24,7 +24,7 @@ copyright = "2020-2023, Ivy Team"
 author = "Ivy Team"
 
 # The full version, including alpha/beta/rc tags
-release = os.getenv('IVY_VERSION') or "dev"
+release = os.getenv("IVY_VERSION") or "dev"
 
 
 # -- General configuration ---------------------------------------------------
@@ -67,7 +67,7 @@ html_static_path = ["_static"]
 
 html_css_files = [
     "css/custom.css",
-    "https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900"
+    "https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900",
 ]
 html_js_files = [
     "js/kapa.ai.js",
@@ -79,13 +79,11 @@ html_theme_options = {
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
-        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new.svg?raw=true",  # noqa: E501
-        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/master/img/externally_linked/ivy_logo_new_dark.svg?raw=true",  # noqa: E501
+        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/main/img/externally_linked/ivy_logo_new.svg?raw=true",  # noqa: E501
+        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/main/img/externally_linked/ivy_logo_new_dark.svg?raw=true",  # noqa: E501
         "link": "https://unify.ai",
     },
-    "switcher": {
-        "version_match": release
-    }
+    "switcher": {"version_match": release},
 }
 
 html_sidebars = {"**": ["custom-toc-tree", "ivy-libraries"]}
@@ -94,7 +92,7 @@ html_title = "Ivy Documentation"
 
 html_favicon = (
     "https://github.com/unifyai/unifyai.github.io"
-    + "/blob/master/img/externally_linked/ivy_logo_only.png?raw=true"
+    + "/blob/main/img/externally_linked/ivy_logo_only.png?raw=true"
 )
 
 autodoc_member_order = "alphabetical"
@@ -143,9 +141,9 @@ simplify_optional_unions = False
 typehints_formatter = None
 
 copybutton_prompt_text = ">>> "
-# By default .gp is also excluded, which is the prompt class of sphinx, we want to 
+# By default .gp is also excluded, which is the prompt class of sphinx, we want to
 # include it for copybutton_prompt_text to find
-copybutton_exclude = '.linenos'
+copybutton_exclude = ".linenos"
 
 # Import an overriding config file
 try:
@@ -159,12 +157,12 @@ def linkcode_resolve(domain, info):
         return None
     if not info["module"]:
         return None
-    
+
     try:
         repo_name
     except Exception:
         return None
-    
+
     modname_full = info["module"]
     fullname = info["fullname"]
 
@@ -196,7 +194,7 @@ def linkcode_resolve(domain, info):
         source, lineno = inspect.getsourcelines(modname)
     except Exception:
         lineno = None
-    
+
     if fn is None:
         return None
 
@@ -206,6 +204,5 @@ def linkcode_resolve(domain, info):
 
     if lineno:
         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
-    
-    return f"https://github.com/unifyai/{repo_name}/blob/master/{mod_name}/{fn}{linespec}"
 
+    return f"https://github.com/unifyai/{repo_name}/blob/main/{mod_name}/{fn}{linespec}"
