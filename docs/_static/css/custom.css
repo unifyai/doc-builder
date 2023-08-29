@@ -283,3 +283,12 @@ html[data-theme="dark"] #kapa-widget-container button {
   background-color: #212121 !important;
 }
 
+.nbinput .prompt,
+.nboutput .prompt {
+  display: none;
+}
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre {
+  padding: 1rem !important;
+}
