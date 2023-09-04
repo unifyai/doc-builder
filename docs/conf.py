@@ -137,7 +137,7 @@ typehints_fully_qualified = False
 always_document_param_types = False
 typehints_document_rtype = True
 typehints_use_rtype = True
-typehints_defaults = "braces-after"
+typehints_defaults = "comma"
 simplify_optional_unions = False
 typehints_formatter = None
 
