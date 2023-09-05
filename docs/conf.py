@@ -146,6 +146,10 @@ copybutton_prompt_text = ">>> "
 # include it for copybutton_prompt_text to find
 copybutton_exclude = ".linenos"
 
+# Disable requirejs because it conflicts with kapa.ai
+# https://github.com/spatialaudio/nbsphinx/issues/409
+nbsphinx_requirejs_path = ""
+
 # Import an overriding config file
 try:
     from docs.partial_conf import *
