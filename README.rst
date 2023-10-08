@@ -11,6 +11,8 @@
 
 **Simple Documentation Builder for Ivy Projects.**
 
+If you are curious about the `doc building pipeline <https://unify.ai/docs/ivy/overview/deep_dive/building_the_docs_pipeline.html>`_ or `building the docs page <https://unify.ai/docs/ivy/overview/contributing/building_the_docs.html>`_
+
 .. raw:: html
 
     <div style="display: flex; justify-content:center; align-items: center;" align="center">
