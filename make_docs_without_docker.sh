@@ -25,7 +25,7 @@ gitadd=false
 installdependencies=true
 build_args=""
 doc_builder_dir=$(dirname $0)
-dependency_installer="install_dependencies.sh"
+dependency_installer="scripts/shell/install_dependencies.sh"
 
 cd $doc_builder_dir
 
