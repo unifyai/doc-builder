@@ -1,9 +1,23 @@
+{% set nav_bar = [
+    { "name": "Model Hub", "href": "/modelhub" },
+    { "name": "Ivy", "href": "/framework" },
+    { "horizontalBar": true },
+    { "name": "Database", "href": "/database" },
+    { "name": "Blog", "href": "/blog" },
+    { "name": "Discord", "href": "https://discord.com/invite/sXyFF8tDtm" }
+]
+%}
+
 <nav role="navigation" class="nav-menu">
     <div class="menu-holder">
         <div class="menu-link-holder">
-            <a href="https://github.com/unifyai/ivy" target="_blank" class="nav-link-header w-nav-link">Github</a>
-            <a href="https://unify.ai/docs/ivy/" target="_blank" class="nav-link-header w-nav-link">Docs</a>
-            <a href="https://discord.com/invite/sXyFF8tDtm" target="_blank" class="nav-link-header w-nav-link">Discord</a>
+            {% for item in nav_bar %}
+                {% if item.horizontalBar %}
+                    <div class="nav-horizontal-bar">|</div>
+                {% else %}
+                    <a href="{{ item.href }}" class="nav-link-header w-nav-link">{{ item.name }}</a>
+                {% endif %}
+            {% endfor -%}
         </div>
     </div>
 </nav>
