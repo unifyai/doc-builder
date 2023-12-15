@@ -80,8 +80,8 @@ html_theme_options = {
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
-        "image_light": "https://github.com/unifyai/unifyai.github.io/blob/main/img/externally_linked/ivy_logo_new.svg?raw=true",  # noqa: E501
-        "image_dark": "https://github.com/unifyai/unifyai.github.io/blob/main/img/externally_linked/ivy_logo_new_dark.svg?raw=true",  # noqa: E501
+        "image_light": "https://uploads-ssl.webflow.com/643fb31f2ef62cf324fab8ca/65423c2ce1f61fda416b592c_logo_unify.svg",  # noqa: E501
+        "image_dark": "https://assets-global.website-files.com/643fb31f2ef62cf324fab8ca/6546745c0b48a47df4098dec_logo_unify-white.svg",  # noqa: E501
         "link": "https://unify.ai",
     },
     "switcher": {"version_match": release},
