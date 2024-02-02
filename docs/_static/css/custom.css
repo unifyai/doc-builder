@@ -23,7 +23,7 @@ a {
 }
 
 a:visited {
-    color: #009600;
+    color: unset;
 }
 
 .wy-menu-vertical a:visited {
@@ -143,11 +143,11 @@ html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(
     }
 }
 
-html {
+:root {
     --pst-sidebar-font-size: 1.0em;
     --pst-sidebar-header-font-size: 1.0em;
     --pst-sidebar-secondary-font-size: 0.9em;
-    --pst-header-height: 86px;
+    --pst-header-height: 50px;
     --pst-font-family-base: 'Inter', var(--pst-font-family-base-system);
     --pst-font-family-heading: 'Inter', var(--pst-font-family-base-system);
     --pst-font-weight-heading: 700;
@@ -162,18 +162,24 @@ html {
 
 html[data-theme="light"] {
     --pst-color-primary: #35A835;
+    --pst-color-secondary: #00a824;
 }
 
 html[data-theme="dark"] {
     --pst-font-color-heading: #E9E9EA;
     --pst-color-primary: #35A835;
+    --pst-color-secondary: #00a824;
+}
+
+.bd-header {
+    height: var(--pst-header-height);
 }
 
 a.current.reference.internal {
     background: rgba(53, 168, 53, 0.1);
     padding-left: 10px;
     margin-left: -10px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
 }
 
 h1,
@@ -187,11 +193,6 @@ h6 {
 
 nav.bd-docs-nav {
     padding-right: 24px;
-}
-
-.navbar-header-items__center {
-    flex-grow: 1;
-    justify-content: center;
 }
 
 .nav-menu {
@@ -229,46 +230,12 @@ nav.bd-docs-nav {
     color: #00a824 !important;
 }
 
-html[data-theme="dark"] .w-nav-link {
-    color: #FFFFFF;
-}
-
-html[data-theme="light"] .w-nav-link {
-    color: #222;
-}
-
-.nav-link-header {
-    flex: 0 auto;
-    padding: 0 !important;
-    line-height: 24px;
-    transition: all .25s ease-out;
-}
-
-.w-nav-link {
-    vertical-align: top;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    text-decoration: none !important;
-    display: inline-block;
-    position: relative;
-}
-
-.nav-horizontal-bar {
-    color: silver;
-}
-
-.navbar-brand {
-    padding: 0;
-}
-
 .dropdown-menu.show {
     overflow: auto;
     max-height: 75vh;
 }
 
-i.fa-chevron-down {
+.navbar-nav .toctree-checkbox~label .fa-chevron-down {
     transition: ease-in-out, transform 0.5s;
     color: #606264;
 }
@@ -307,4 +274,17 @@ html[data-theme="dark"] #kapa-widget-container button {
 div.nbinput.container div.input_area div[class*=highlight]>pre,
 div.nboutput.container div.output_area div[class*=highlight]>pre {
     padding: 1rem !important;
+}
+
+/* This is to resolve tailwind css conflict */
+.data-\[loaded\=true\]\:opacity-100[data-loaded=true], .data-\[moving\]\:opacity-100[data-moving] {
+    opacity: 1 !important;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
 }
