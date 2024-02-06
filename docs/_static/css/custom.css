@@ -288,3 +288,7 @@ ul {
 ol {
     list-style: decimal;
 }
+
+audio, canvas, embed, iframe, img, object, svg, video {
+    display: unset;
+}
