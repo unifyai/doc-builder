@@ -19,7 +19,7 @@
 </div>
 <script>
   const html = `<div id="navbar-target"></div>`;
-  initializeNavbar(html, "dark", true);
+  initializeNavbar(html, true);
   waitForElm("navbar-target").then((target) => {
     for (let elem of document.getElementById("navbar-contents").children) {
       target.appendChild(elem);
