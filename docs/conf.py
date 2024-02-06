@@ -75,7 +75,6 @@ html_js_files = [
 ]
 
 html_theme_options = {
-    
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
     "navbar_persistent": ["search-button"],
     "header_links_before_dropdown": 100,
@@ -86,6 +85,9 @@ html_theme_options = {
         "link": "https://unify.ai",
     },
     "switcher": {"version_match": release},
+    "analytics": {
+        "google_analytics_id": "G-QP5BET66XH",
+    }
 }
 
 html_sidebars = {"**": ["custom-toc-tree", "ivy-libraries"]}
