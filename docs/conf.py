@@ -75,8 +75,9 @@ html_js_files = [
 ]
 
 html_theme_options = {
-    "navbar_center": ["nav-bar-middle"],
+    
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
+    "navbar_persistent": ["search-button"],
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {

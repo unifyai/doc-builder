@@ -1,0 +1,30 @@
+{%- extends "pydata_sphinx_theme/layout.html" %}
+{% block scripts_end %}
+{{ super() }}
+<script src="https://cdn.saas.unify.ai/js/unify-components-shared.js"></script>
+<script src="https://cdn.saas.unify.ai/js/unify-components.js"></script>
+<div id="navbar-contents" style="display: none;">
+  {% if theme_navbar_end or theme_navbar_persistent %}
+  <div class="navbar-header-items__end">
+    {% for navbar_item in theme_navbar_persistent %}
+    <div class="navbar-item navbar-persistent--container">
+      {% include navbar_item %}
+    </div>
+    {% endfor %}
+    {% for navbar_item in theme_navbar_end %}
+    <div class="navbar-item">{% include navbar_item %}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+<script>
+  const html = `<div id="navbar-target"></div>`;
+  initializeNavbar(html, true);
+  waitForElm("navbar-target").then((target) => {
+    for (let elem of document.getElementById("navbar-contents").children) {
+      target.appendChild(elem);
+    }
+    document.getElementById("navbar-contents").remove();
+  });
+</script>
+{% endblock %}

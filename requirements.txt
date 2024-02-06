@@ -1,5 +1,5 @@
 Sphinx==7.2.5
-pydata-sphinx-theme==0.13.3
+pydata-sphinx-theme==0.15.2
 sphinxcontrib-applehelp==1.0.7
 sphinxcontrib-devhelp==1.0.5
 sphinxcontrib-htmlhelp==2.0.4
