@@ -281,6 +281,16 @@ div.nboutput.container div.output_area div[class*=highlight]>pre {
     opacity: 1 !important;
 }
 
+.hover\:text-\[\#0a0c13\]:hover {
+    --tw-text-opacity: 1 !important;
+    color: rgb(10 12 19/var(--tw-text-opacity)) !important;
+}
+
+.text-\[\#222\] {
+    --tw-text-opacity: 1 !important;
+    color: rgb(34 34 34/var(--tw-text-opacity)) !important;
+}
+
 ul {
     list-style: disc;
 }
