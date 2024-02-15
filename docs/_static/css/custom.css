@@ -283,6 +283,15 @@ div.nboutput.container div.output_area div[class*=highlight]>pre {
     color: rgb(34 34 34/var(--tw-text-opacity)) !important;
 }
 
+:is([data-theme=dark] .dark\:text-white\/90) {
+    color: hsla(0,0%,100%,.9) !important;
+}
+
+:is([data-theme=dark] .dark\:hover\:text-white:hover) {
+    --tw-text-opacity: 1 !important;
+    color: rgb(255 255 255/var(--tw-text-opacity)) !important;
+}
+
 ul {
     list-style: disc;
 }
