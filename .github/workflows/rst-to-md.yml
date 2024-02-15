@@ -1,0 +1,31 @@
+name: Convert RST to MD
+
+on:
+  push:
+    paths:
+      - 'readme.rst'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Set up Pandoc
+        run: |
+          sudo apt-get install pandoc
+
+      - name: Convert RST to MD
+        run: |
+          pandoc --from=rst --to=markdown readme.rst -o README.md
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Converted readme.rst to README.md
+          commit_options: '--no-verify --signoff'
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
+          commit_author: GitHub Actions <actions@github.com>
