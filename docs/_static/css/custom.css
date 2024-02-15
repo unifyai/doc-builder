@@ -292,6 +292,15 @@ div.nboutput.container div.output_area div[class*=highlight]>pre {
     color: rgb(255 255 255/var(--tw-text-opacity)) !important;
 }
 
+.text-foreground {
+    --tw-text-opacity: 1 !important;
+    color: hsl(var(--nextui-foreground)/var(--nextui-foreground-opacity, var(--tw-text-opacity))) !important;
+}
+
+.hover\:text-accent:hover {
+    color: var(--accent-color) !important;
+}
+
 ul {
     list-style: disc;
 }
