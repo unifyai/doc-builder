@@ -301,6 +301,11 @@ div.nboutput.container div.output_area div[class*=highlight]>pre {
     color: var(--accent-color) !important;
 }
 
+:is([data-theme=dark] .dark\:hover\:text-\[\#00b828\]:hover) {
+    --tw-text-opacity: 1 !important;
+    color: rgb(0 184 40/var(--tw-text-opacity)) !important;
+}
+
 ul {
     list-style: disc;
 }
