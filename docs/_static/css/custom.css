@@ -139,7 +139,7 @@ html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(
     --pst-sidebar-font-size: 1.0em;
     --pst-sidebar-header-font-size: 1.0em;
     --pst-sidebar-secondary-font-size: 0.9em;
-    --pst-header-height: 50px;
+    --pst-header-height: 44px;
     --pst-font-family-base: 'Inter', var(--pst-font-family-base-system);
     --pst-font-family-heading: 'Inter', var(--pst-font-family-base-system);
     --pst-font-weight-heading: 700;
@@ -161,10 +161,6 @@ html[data-theme="dark"] {
     --pst-font-color-heading: #E9E9EA;
     --pst-color-primary: #35A835;
     --pst-color-secondary: #00a824;
-}
-
-.bd-header {
-    height: var(--pst-header-height);
 }
 
 a.current.reference.internal {
