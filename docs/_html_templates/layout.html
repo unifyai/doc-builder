@@ -18,13 +18,18 @@
   {% endif %}
 </div>
 <script>
-  const html = `<div id="navbar-target"></div>`;
-  initializeNavbar(html, true);
-  waitForElm("navbar-target").then((target) => {
+  const html = `<div></div>`;
+  const toc = `{% include "custom-toc-tree.html" %}`;
+  initializeNavbar(html, true, toc);
+  Promise.all([waitForElm("unify-navbar-end"), waitForElm("unify-mobile-navbar-end")]).then(([target, mobileTarget]) => {
     for (let elem of document.getElementById("navbar-contents").children) {
-      target.appendChild(elem);
+      target.children[0].appendChild(elem.cloneNode(true));
+      mobileTarget.children[0].appendChild(elem.cloneNode(true));
     }
     document.getElementById("navbar-contents").remove();
+    const scripts = `{{ super()|replace("<", "&lt")|replace(">", "&gt")}}`.replace(/&lt/g, "<").replace(/&gt/g, ">");
+    const divFragment = document.createRange().createContextualFragment(scripts);
+    document.body.prepend(divFragment);
   });
 </script>
 {% endblock %}
