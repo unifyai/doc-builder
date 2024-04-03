@@ -139,7 +139,7 @@ html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(
     --pst-sidebar-font-size: 1.0em;
     --pst-sidebar-header-font-size: 1.0em;
     --pst-sidebar-secondary-font-size: 0.9em;
-    --pst-header-height: 44px;
+    --pst-header-height: 50px;
     --pst-font-family-base: 'Inter', var(--pst-font-family-base-system);
     --pst-font-family-heading: 'Inter', var(--pst-font-family-base-system);
     --pst-font-weight-heading: 700;
