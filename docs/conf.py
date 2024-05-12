@@ -49,6 +49,7 @@ extensions = [
     "docs._ext.discussion_linker",
     "docs._ext.skippable_function",
     "docs._ext.ivy_data",
+    "sphinxcontrib.video",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
