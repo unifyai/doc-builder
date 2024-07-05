@@ -87,7 +87,9 @@ if [ $installdependencies = true ]; then
   pip install -r ./requirements.txt || exit 1
 
   # Run a prebuild script if exists
-  [ -x $1/docs/prebuild.sh ] && $1/docs/prebuild.sh
+  if [ -f $1/docs/prebuild.sh ]; then
+    bash $1/docs/prebuild.sh $1
+  fi
 
   # run the dependency installer script
   (cd $1 && [ -x ./$dependency_installer ] && ./$dependency_installer)

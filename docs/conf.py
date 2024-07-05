@@ -19,12 +19,12 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "Ivy"
+project = "Unify"
 copyright = "2020-2023, Unify"
 author = "Unify"
 
 # The full version, including alpha/beta/rc tags
-release = os.getenv("IVY_VERSION") or "dev"
+release = os.getenv("UNIFY_VERSION") or "dev"
 
 
 # -- General configuration ---------------------------------------------------
@@ -76,7 +76,7 @@ html_js_files = [
 ]
 
 html_theme_options = {
-    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
+    "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "navbar_persistent": ["search-button"],
     "header_links_before_dropdown": 100,
     "secondary_sidebar_items": ["page-toc"],
@@ -85,13 +85,12 @@ html_theme_options = {
         "image_dark": "https://assets-global.website-files.com/643fb31f2ef62cf324fab8ca/6546745c0b48a47df4098dec_logo_unify-white.svg",  # noqa: E501
         "link": "https://unify.ai",
     },
-    "switcher": {"version_match": release},
     "analytics": {
         "google_analytics_id": "G-QP5BET66XH",
     }
 }
 
-html_sidebars = {"**": ["custom-toc-tree", "ivy-libraries"]}
+html_sidebars = {"**": ["custom-toc-tree"]}
 
 html_title = "Ivy Documentation"
 
@@ -119,22 +118,6 @@ napoleon_use_rtype = False
 napoleon_preprocess_types = False
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
-napoleon_custom_sections = [
-    ("Functional Example", "Examples"),
-    ("Functional Examples", "Examples"),
-    ("Functional Array Example", "Examples"),
-    ("Functional Array Examples", "Examples"),
-    ("Functional Container Example", "Examples"),
-    ("Functional Container Examples", "Examples"),
-    ("Instance Method Example", "Examples"),
-    ("Instance Method Examples", "Examples"),
-    ("Array Instance Method Example", "Examples"),
-    ("Array Instance Method Examples", "Examples"),
-    ("Container Instance Method Example", "Examples"),
-    ("Container Instance Method Examples", "Examples"),
-    ("Operator Example", "Examples"),
-    ("Operator Examples", "Examples"),
-]
 
 # type hints
 typehints_fully_qualified = False

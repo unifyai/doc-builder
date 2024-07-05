@@ -1,4 +1,4 @@
-{% block name %}{{name | replace("_", " ") | capitalize | escape | underline}}{% endblock %}
+{% block name %}{% endblock %}
 
 .. autosummary::{% block options %}
     :toctree: {{name}}
